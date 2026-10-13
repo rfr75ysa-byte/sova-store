@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#061629">
+  <title>تفاصيل العطر | SOVA</title>
+  <link rel="stylesheet" href="static/css/style.css">
+  <style>
+    .details{max-width:1100px;margin:auto;padding:65px 24px;display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center;min-height:75vh}
+    .details-image{min-height:420px;display:grid;place-items:center;background:radial-gradient(ellipse,#17476b,transparent 68%);border:1px solid rgba(154,204,238,.16)}
+    .details-image img{width:100%;height:420px;object-fit:contain;padding:25px}
+    .details-info .eyebrow{color:#35b8ff;letter-spacing:2px}
+    .details-info h1{font-size:clamp(30px,5vw,52px);margin:15px 0}
+    .details-info p{color:#a7bdd0;line-height:2}
+    .details-price{display:block;font-size:24px;color:#8cddff;margin:25px 0}
+    .details-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .details-actions button,.details-actions a{border:0;padding:14px 22px;font-weight:bold}
+    .add-button{background:#35b8ff;color:#04172a}
+    .back-button{border:1px solid #35b8ff66!important;background:transparent;color:#8cddff}
+    .notice{color:#8cddff!important;font-size:13px;min-height:25px}
+    @media(max-width:700px){.details{grid-template-columns:1fr;gap:25px;padding:35px 18px}.details-image,.details-image img{min-height:300px;height:300px}}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a class="logo" href="index.html">SOVA<span>®</span></a>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="index.html#collection">عطورنا</a>
+      <a href="cart.html">سلة المشتريات (<span data-cart-count>0</span>)</a>
+    </nav>
+  </header>
+
+  <main class="details">
+    <div class="details-image">
+      <img id="perfume-image" src="static/images/afnan.jpg" alt="عطر SOVA">
+    </div>
+    <section class="details-info">
+      <p class="eyebrow">SOVA PERFUME COLLECTION</p>
+      <h1 id="perfume-name">Afnan 9 PM</h1>
+      <p id="perfume-description">عطر مميز لمحبي الروائح الجذابة والحضور القوي.</p>
+      <strong class="details-price" id="perfume-price">65,000 د.ع</strong>
+      <div class="details-actions">
+        <button class="add-button" id="add-button" type="button">أضف إلى السلة +</button>
+        <a class="back-button" href="index.html#collection">رجوع للعطور</a>
+      </div>
+      <p class="notice" id="notice" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© SOVA — الفخامة تبدأ من التفاصيل</p>
+    <a href="https://wa.me/9647806364447">تواصل ويانا</a>
+  </footer>
+
+  <script src="static/js/app.js"></script>
+  <script>
+    const perfumes = {
+      afnan: {
+        name: "Afnan 9 PM",
+        price: 65000,
+        image: "static/images/afnan.jpg",
+        description: "عطر مميز لمحبي الروائح الجذابة والحضور القوي."
+      },
+      asad: {
+        name: "Lattafa Asad",
+        price: 45000,
+        image: "static/images/asad.jpg",
+        description: "عطر رجالي بطابع دافئ وجذاب."
+      },
+      freeze: {
+        name: "Freeze Riiffs",
+        price: 50000,
+        image: "static/images/FREEZE RIIFFS.jpg",
+        description: "عطر مميز لمحبي الروائح المنعشة والحضور الأنيق."
+      },
+      flames: {
+        name: "Freeze In Flames Riiffs",
+        price: 50000,
+        image: "static/images/FREEZE IN FLAMES RIIFFS.jpg",
+        description: "عطر بطابع مميز لإطلالة مختلفة."
+      }
+    };
+
+    const id = new URLSearchParams(window.location.search).get("id") || "afnan";
+    const perfume = perfumes[id] || perfumes.afnan;
+
+    document.title = perfume.name + " | SOVA";
+    document.getElementById("perfume-name").textContent = perfume.name;
+    document.getElementById("perfume-description").textContent = perfume.description;
+    document.getElementById("perfume-price").textContent =
+      perfume.price.toLocaleString("en-US") + " د.ع";
+    document.getElementById("perfume-image").src = perfume.image;
+    document.getElementById("perfume-image").alt = perfume.name;
+
+    document.getElementById("add-button").addEventListener("click", () => {
+      if (typeof sovaAddToCart === "function") {
+        sovaAddToCart(id);
+        document.getElementById("notice").textContent = "انضاف العطر للسلة 💙";
+      } else {
+        document.getElementById("notice").textContent =
+          "تعذر تحميل السلة. حدّث الصفحة وحاول مرة ثانية.";
+      }
+    });
+  </script>
+</body>
+</html>
