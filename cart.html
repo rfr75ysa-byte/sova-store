@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#061629">
+  <title>سلة المشتريات | SOVA</title>
+  <link rel="stylesheet" href="static/css/style.css">
+  <style>
+    .cart-page{max-width:1000px;margin:auto;padding:55px 22px 80px;min-height:70vh}
+    .cart-page h1{font-size:clamp(32px,5vw,48px);margin-bottom:8px}
+    .cart-subtitle{color:#91a8bf;margin-bottom:35px}
+    .cart-item{display:flex;align-items:center;gap:20px;padding:18px;margin-bottom:14px;background:linear-gradient(145deg,#102c47,#081727);border:1px solid rgba(154,204,238,.16)}
+    .cart-item img{flex-shrink:0}
+    .cart-item h3{margin:0 0 8px}
+    .cart-item p{color:#a7bdd0;font-size:13px}
+    .cart-item button{margin:4px;padding:6px 12px;border:1px solid #35b8ff66;background:transparent;color:#8cddff}
+    .cart-item button:hover{background:#35b8ff;color:#061629}
+    .cart-summary{margin-top:28px;padding:25px;border:1px solid rgba(154,204,238,.2);background:#0a2038}
+    .cart-summary h2{margin:0 0 20px}
+    #cart-total{color:#8cddff}
+    .cart-buttons{display:flex;gap:12px;flex-wrap:wrap}
+    .cart-buttons button,.cart-buttons a{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;font-weight:bold;border:0}
+    .checkout-button{background:#35b8ff;color:#061629}
+    .continue-button{border:1px solid #35b8ff66!important;background:transparent;color:#8cddff}
+    @media(max-width:500px){.cart-item{gap:10px;padding:10px}.cart-item img{width:65px!important;height:80px!important}.cart-item button{margin:3px;padding:6px 9px}}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a class="logo" href="index.html">SOVA<span>®</span></a>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="index.html#collection">عطورنا</a>
+      <a href="cart.html">السلة (<span data-cart-count>0</span>)</a>
+    </nav>
+  </header>
+
+  <main class="cart-page">
+    <p class="eyebrow">YOUR SOVA SELECTION</p>
+    <h1>سلة المشتريات</h1>
+    <p class="cart-subtitle">اختار عطرك المفضل وخلي الباقي علينا 💙</p>
+
+    <div id="cart-items">
+      <p>جاري تحميل السلة...</p>
+    </div>
+
+    <section class="cart-summary">
+      <h2>ملخص الطلب</h2>
+      <p>المجموع الكلي: <strong id="cart-total">0 د.ع</strong></p>
+      <p style="color:#91a8bf;font-size:12px;line-height:1.9">
+        أجور التوصيل، إن وجدت، يتم تأكيدها عند التواصل.
+      </p>
+      <div class="cart-buttons">
+        <button type="button" class="checkout-button" data-checkout>
+          أكمل الطلب عبر واتساب
+        </button>
+        <a href="index.html#collection" class="continue-button">
+          متابعة التسوق
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© SOVA — الفخامة تبدأ من التفاصيل</p>
+    <a href="https://wa.me/9647806364447">تواصل ويانا</a>
+  </footer>
+
+  <script src="static/js/app.js"></script>
+</body>
+</html>
