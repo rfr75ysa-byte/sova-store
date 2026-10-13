@@ -65,3 +65,16 @@ footer{padding:30px clamp(20px,6vw,88px);border-top:1px solid var(--line);displa
     object-position: center;
 }
 
+
+/* Fix SOVA product image visibility */
+.product-image img {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100%;
+    object-fit: contain !important;
+    position: relative;
+    z-index: 2;
+}
