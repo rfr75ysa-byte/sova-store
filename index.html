@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#061629">
+  <title>SOVA | عطور فاخرة</title>
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <a class="logo" href="index.html">SOVA<span>®</span></a>
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="#about">من نحن</a>
+    <a href="#collection">عطورنا</a>
+    <a href="cart.html">السلة 🛒 <b id="cart-count">0</b></a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-content">
+      <p class="eyebrow">THE ART OF PERFUMERY</p>
+      <h1>مو مجرد عطر،<br><span>هذا حضور.</span></h1>
+      <p class="description">
+        اختيارات عطرية تترك أثرها قبل الكلام،
+        وتبقى بالذاكرة بعد الرحيل.
+      </p>
+      <a class="button" href="#collection">اكتشف عطورنا ↙</a>
+    </div>
+
+    <div class="hero-art">
+      <div class="ring ring-one"></div>
+      <div class="ring ring-two"></div>
+      <div class="bottle">
+        <div class="cap"></div>
+        <div class="neck"></div>
+        <div class="bottle-body">
+          <span>SOVA</span>
+          <small>EAU DE PARFUM</small>
+        </div>
+      </div>
+      <p class="art-caption">SCENT IS A LANGUAGE</p>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <p class="eyebrow">OUR PHILOSOPHY</p>
+    <h2>الفخامة تبدأ<br>من <span>التفاصيل.</span></h2>
+    <p>عطور مختارة تجمع بين الرائحة المميزة والسعر المناسب، حتى تلقى عطرك اللي يشبهك.</p>
+  </section>
+
+  <section class="collection" id="collection">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">THE COLLECTION</p>
+        <h2>اختار عطرك</h2>
+      </div>
+      <p>كل عطر إله شخصية<br>وأنت تختار شنو يشبهك.</p>
+    </div>
+
+    <div class="products">
+      <article class="product">
+        <a href="product.html?id=afnan" class="product-image">
+          <img src="static/images/afnan.jpg" alt="Afnan 9 PM">
+        </a>
+        <p class="product-label">EVENING SIGNATURE</p>
+        <h3>Afnan 9 PM</h3>
+        <p class="product-desc">عطر مميز لمحبي الروائح الجذابة والحضور القوي</p>
+        <div class="product-bottom">
+          <strong>65,000 د.ع</strong>
+          <button onclick="addToCart('afnan')">＋</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <a href="product.html?id=asad" class="product-image">
+          <img src="static/images/asad.jpg" alt="Lattafa Asad">
+        </a>
+        <p class="product-label">BOLD & WARM</p>
+        <h3>Lattafa Asad</h3>
+        <p class="product-desc">عطر رجالي بطابع دافئ وجذاب</p>
+        <div class="product-bottom">
+          <strong>45,000 د.ع</strong>
+          <button onclick="addToCart('asad')">＋</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <a href="product.html?id=freeze" class="product-image">
+          <img src="static/images/FREEZE RIIFFS.jpg" alt="Freeze Riiffs">
+        </a>
+        <p class="product-label">FRESH IMPACT</p>
+        <h3>Freeze Riiffs</h3>
+        <p class="product-desc">انتعاش واضح بطابع عصري</p>
+        <div class="product-bottom">
+          <strong>50,000 د.ع</strong>
+          <button onclick="addToCart('freeze')">＋</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <a href="product.html?id=flames" class="product-image">
+          <img src="static/images/FREEZE IN FLAMES RIIFFS.jpg" alt="Freeze In Flames Riiffs">
+        </a>
+        <p class="product-label">COOL CONTRAST</p>
+        <h3>Freeze In Flames</h3>
+        <p class="product-desc">توازن بين الانتعاش والدفء</p>
+        <div class="product-bottom">
+          <strong>50,000 د.ع</strong>
+          <button onclick="addToCart('flames')">＋</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="closing">
+    <p class="eyebrow">YOUR NEXT SIGNATURE</p>
+    <h2>خلي حضورك<br><span>ينحفظ بالذاكرة.</span></h2>
+    <a class="button" href="#collection">تسوّق العطور ↗</a>
+  </section>
+</main>
+
+<footer>
+  <a class="logo" href="index.html">SOVA<span>®</span></a>
+  <p>© 2026 SOVA — كل الحقوق محفوظة</p>
+  <a href="https://wa.me/9647806364447">تواصل ويانا ↗</a>
+</footer>
+
+<script src="static/js/app.js"></script>
+</body>
+</html>
