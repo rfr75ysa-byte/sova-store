@@ -1,3 +1,4 @@
+
 const SOVA_PRODUCTS = {
   "afnan": {
     name: "Afnan 9 PM",
@@ -78,8 +79,10 @@ function sovaUpdateCartCount() {
 }
 
 function sovaAddToCart(id) {
+  id = String(id || "").trim();
+
   if (!SOVA_PRODUCTS[id]) {
-    alert("هذا العطر غير موجود حالياً 💙");
+    alert("ما كدرنا نحدد العطر، حاول مرة ثانية 💙");
     return;
   }
 
@@ -87,7 +90,9 @@ function sovaAddToCart(id) {
   cart[id] = (Number(cart[id]) || 0) + 1;
 
   sovaSaveCart(cart);
-  alert("انضاف العطر للسلة بنجاح 💙");
+  sovaRenderCart();
+
+  alert("انضاف " + SOVA_PRODUCTS[id].name + " للسلة بنجاح 💙");
 }
 
 function sovaChangeQuantity(id, change) {
@@ -147,18 +152,13 @@ function sovaRenderCart() {
         <div style="display:none;color:#8cddff;font-size:12px;min-width:85px">
           صورة العطر غير متوفرة
         </div>
-
         <div style="flex:1;min-width:0">
           <h3>${product.name}</h3>
           <p>سعر القطعة: ${sovaFormatPrice(product.price)}</p>
-
           <button type="button" data-cart-action="minus" data-id="${id}">−</button>
           <span>${quantity}</span>
           <button type="button" data-cart-action="plus" data-id="${id}">+</button>
-          <button type="button" data-cart-action="remove" data-id="${id}">
-            حذف
-          </button>
-
+          <button type="button" data-cart-action="remove" data-id="${id}">حذف</button>
           <p>المجموع: ${sovaFormatPrice(subtotal)}</p>
         </div>
       </article>
@@ -188,7 +188,6 @@ function sovaCheckout() {
 
     const subtotal = product.price * quantity;
     total += subtotal;
-
     lines.push(
       `${product.name} × ${quantity} = ${sovaFormatPrice(subtotal)}`
     );
@@ -216,25 +215,30 @@ function sovaCheckout() {
   window.open(url, "_blank", "noopener,noreferrer");
 }
 
+/* تشغيل أزرار السلة والإضافة */
 document.addEventListener("click", event => {
-  const button = event.target.closest("[data-cart-action]");
-  if (!button) return;
+  const actionButton = event.target.closest("[data-cart-action]");
 
-  const id = button.dataset.id;
-  const action = button.dataset.cartAction;
+  if (actionButton) {
+    const id = actionButton.dataset.id;
+    const action = actionButton.dataset.cartAction;
 
-  if (action === "plus") sovaChangeQuantity(id, 1);
-  if (action === "minus") sovaChangeQuantity(id, -1);
-  if (action === "remove") sovaRemoveFromCart(id);
+    if (action === "plus") sovaChangeQuantity(id, 1);
+    if (action === "minus") sovaChangeQuantity(id, -1);
+    if (action === "remove") sovaRemoveFromCart(id);
+
+    return;
+  }
+
+  const addButton = event.target.closest("[data-add-to-cart]");
+
+  if (addButton) {
+    event.preventDefault();
+    sovaAddToCart(addButton.dataset.addToCart);
+  }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("[data-add-to-cart]").forEach(button => {
-    button.addEventListener("click", () => {
-      sovaAddToCart(button.dataset.addToCart);
-    });
-  });
-
   document.querySelectorAll("[data-checkout]").forEach(button => {
     button.addEventListener("click", sovaCheckout);
   });
