@@ -57,32 +57,63 @@
 
   <script src="static/js/app.js"></script>
   <script>
-    const perfumes = {
-      afnan: {
-        name: "Afnan 9 PM",
-        price: 65000,
-        image: "static/images/AFNAN.jpg",
-        description: "عطر مميز لمحبي الروائح الجذابة والحضور القوي."
-      },
-      asad: {
-        name: "Lattafa Asad",
-        price: 45000,
-        image: "static/images/ASAD.jpg",
-        description: "عطر رجالي بطابع دافئ وجذاب."
-      },
-      freeze: {
-        name: "Freeze Riiffs",
-        price: 50000,
-        image: "static/images/FREEZE IN FLAMES RIIFFS.jpg",
-        description: "عطر مميز لمحبي الروائح المنعشة والحضور الأنيق."
-      },
-      flames: {
-        name: "Freeze In Flames Riiffs",
-        price: 50000,
-        image: "static/images/FREEZE IN FLAMES RIIFFS.jpg",
-        description: "عطر بطابع مميز لإطلالة مختلفة."
-      }
-    };
+  
+const perfumes = {
+  afnan: {
+    name: "Afnan 9 PM",
+    price: 65000,
+    image: "static/images/AFNAN.jpg",
+    description: "عطر مميز لمحبي الروائح الجذابة والحضور القوي."
+  },
+  asad: {
+    name: "Lattafa Asad",
+    price: 45000,
+    image: "static/images/ASAD.jpg",
+    description: "عطر رجالي بطابع دافئ وجذاب."
+  },
+  freeze: {
+    name: "Freeze Riiffs",
+    price: 50000,
+    image: "static/images/FREEZE RIIFFS.jpg",
+    description: "عطر مميز لمحبي الروائح المنعشة والحضور الأنيق."
+  },
+  flames: {
+    name: "Freeze In Flames Riiffs",
+    price: 50000,
+    image: "static/images/FREEZE IN FLAMES RIIFFS.jpg",
+    description: "عطر بطابع مميز لإطلالة مختلفة."
+  },
+  "night-out": {
+    name: "Afnan 9 PM Night Out",
+    price: 65000,
+    image: "static/images/night-out.jpg",
+    description: "طابع مسائي مميز لمحبي الروائح الجريئة."
+  },
+  "supremacy-ce": {
+    name: "Supremacy Collector's Edition",
+    price: 70000,
+    image: "static/images/supremacy-ce.jpg",
+    description: "عطر أنيق بطابع مميز وحضور قوي."
+  },
+  "hawas-ice": {
+    name: "Hawas Ice",
+    price: 45000,
+    image: "static/images/hawas-ice.jpg",
+    description: "انتعاش بارد بطابع عصري."
+  },
+  "hawas-black": {
+    name: "Hawas Black",
+    price: 45000,
+    image: "static/images/hawas-black.jpg",
+    description: "طابع غامض لمحبي الروائح القوية."
+  },
+  "hawas-kobra": {
+    name: "Hawas Kobra",
+    price: 45000,
+    image: "static/images/hawas-kobra.jpg",
+    description: "شخصية عطرية جريئة ومميزة."
+  }
+};
 
     const id = new URLSearchParams(window.location.search).get("id") || "afnan";
     const perfume = perfumes[id] || perfumes.afnan;
