@@ -1,24 +1,48 @@
-
 const SOVA_PRODUCTS = {
-  afnan: {
+  "afnan": {
     name: "Afnan 9 PM",
     price: 65000,
-    image: "static/images/afnan.jpg"
+    image: "static/images/AFNAN.jpg"
   },
-  asad: {
+  "asad": {
     name: "Lattafa Asad",
     price: 45000,
-    image: "static/images/asad.jpg"
+    image: "static/images/ASAD.jpg"
   },
-  freeze: {
+  "freeze": {
     name: "Freeze Riiffs",
     price: 50000,
     image: "static/images/FREEZE RIIFFS.jpg"
   },
-  flames: {
+  "flames": {
     name: "Freeze In Flames Riiffs",
     price: 50000,
     image: "static/images/FREEZE IN FLAMES RIIFFS.jpg"
+  },
+  "night-out": {
+    name: "Afnan 9 PM Night Out",
+    price: 65000,
+    image: "static/images/night-out.jpg"
+  },
+  "supremacy-ce": {
+    name: "Supremacy Collector's Edition",
+    price: 70000,
+    image: "static/images/supremacy-ce.jpg"
+  },
+  "hawas-ice": {
+    name: "Hawas Ice",
+    price: 45000,
+    image: "static/images/hawas-ice.jpg"
+  },
+  "hawas-black": {
+    name: "Hawas Black",
+    price: 45000,
+    image: "static/images/hawas-black.jpg"
+  },
+  "hawas-kobra": {
+    name: "Hawas Kobra",
+    price: 45000,
+    image: "static/images/hawas-kobra.jpg"
   }
 };
 
@@ -42,6 +66,7 @@ function sovaSaveCart(cart) {
 
 function sovaUpdateCartCount() {
   const cart = sovaGetCart();
+
   const count = Object.values(cart).reduce(
     (sum, quantity) => sum + Math.max(0, Number(quantity) || 0),
     0
@@ -53,12 +78,15 @@ function sovaUpdateCartCount() {
 }
 
 function sovaAddToCart(id) {
-  if (!SOVA_PRODUCTS[id]) return;
+  if (!SOVA_PRODUCTS[id]) {
+    alert("هذا العطر غير موجود حالياً 💙");
+    return;
+  }
 
   const cart = sovaGetCart();
   cart[id] = (Number(cart[id]) || 0) + 1;
-  sovaSaveCart(cart);
 
+  sovaSaveCart(cart);
   alert("انضاف العطر للسلة بنجاح 💙");
 }
 
@@ -81,6 +109,7 @@ function sovaChangeQuantity(id, change) {
 function sovaRemoveFromCart(id) {
   const cart = sovaGetCart();
   delete cart[id];
+
   sovaSaveCart(cart);
   sovaRenderCart();
 }
@@ -108,17 +137,28 @@ function sovaRenderCart() {
 
     html += `
       <article class="cart-item">
-        <img src="${product.image}" alt="${product.name}"
-             style="width:85px;height:95px;object-fit:contain">
-        <div>
+        <img
+          src="${product.image}"
+          alt="${product.name}"
+          loading="lazy"
+          style="width:100px;height:110px;object-fit:contain;flex-shrink:0;background:#081727;border-radius:6px"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+        >
+        <div style="display:none;color:#8cddff;font-size:12px;min-width:85px">
+          صورة العطر غير متوفرة
+        </div>
+
+        <div style="flex:1;min-width:0">
           <h3>${product.name}</h3>
-          <p>${sovaFormatPrice(product.price)}</p>
+          <p>سعر القطعة: ${sovaFormatPrice(product.price)}</p>
+
           <button type="button" data-cart-action="minus" data-id="${id}">−</button>
           <span>${quantity}</span>
           <button type="button" data-cart-action="plus" data-id="${id}">+</button>
           <button type="button" data-cart-action="remove" data-id="${id}">
             حذف
           </button>
+
           <p>المجموع: ${sovaFormatPrice(subtotal)}</p>
         </div>
       </article>
@@ -128,7 +168,9 @@ function sovaRenderCart() {
   container.innerHTML = html || "<p>سلتك فارغة حالياً 💙</p>";
 
   const totalElement = document.getElementById("cart-total");
-  if (totalElement) totalElement.textContent = sovaFormatPrice(total);
+  if (totalElement) {
+    totalElement.textContent = sovaFormatPrice(total);
+  }
 
   sovaUpdateCartCount();
 }
@@ -146,7 +188,10 @@ function sovaCheckout() {
 
     const subtotal = product.price * quantity;
     total += subtotal;
-    lines.push(`${product.name} × ${quantity} = ${sovaFormatPrice(subtotal)}`);
+
+    lines.push(
+      `${product.name} × ${quantity} = ${sovaFormatPrice(subtotal)}`
+    );
   });
 
   if (!lines.length) {
@@ -164,7 +209,10 @@ function sovaCheckout() {
     "يرجى تأكيد الطلب والتوصيل."
   ].join("\n");
 
-  const url = "https://wa.me/9647806364447?text=" + encodeURIComponent(message);
+  const url =
+    "https://wa.me/9647806364447?text=" +
+    encodeURIComponent(message);
+
   window.open(url, "_blank", "noopener,noreferrer");
 }
 
