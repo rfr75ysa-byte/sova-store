@@ -51,7 +51,10 @@ const SOVA_CART_KEY = "sova_cart";
 
 function sovaGetCart() {
   try {
-    const cart = JSON.parse(localStorage.getItem(SOVA_CART_KEY) || "{}");
+    const cart = JSON.parse(
+      localStorage.getItem(SOVA_CART_KEY) || "{}"
+    );
+
     return cart && typeof cart === "object" && !Array.isArray(cart)
       ? cart
       : {};
@@ -73,7 +76,9 @@ function sovaUpdateCartCount() {
     0
   );
 
-  document.querySelectorAll("[data-cart-count]").forEach(element => {
+  document.querySelectorAll(
+    "[data-cart-count], #cart-count"
+  ).forEach(element => {
     element.textContent = count;
   });
 }
@@ -93,6 +98,11 @@ function sovaAddToCart(id) {
   sovaRenderCart();
 
   alert("انضاف " + SOVA_PRODUCTS[id].name + " للسلة بنجاح 💙");
+}
+
+// توافق مباشر ويا أزرار index.html الحالية
+function addToCart(id) {
+  sovaAddToCart(id);
 }
 
 function sovaChangeQuantity(id, change) {
@@ -168,6 +178,7 @@ function sovaRenderCart() {
   container.innerHTML = html || "<p>سلتك فارغة حالياً 💙</p>";
 
   const totalElement = document.getElementById("cart-total");
+
   if (totalElement) {
     totalElement.textContent = sovaFormatPrice(total);
   }
@@ -188,6 +199,7 @@ function sovaCheckout() {
 
     const subtotal = product.price * quantity;
     total += subtotal;
+
     lines.push(
       `${product.name} × ${quantity} = ${sovaFormatPrice(subtotal)}`
     );
@@ -215,8 +227,7 @@ function sovaCheckout() {
   window.open(url, "_blank", "noopener,noreferrer");
 }
 
-/* تشغيل أزرار السلة والإضافة */
-document.addEventListener("click", event => {
+document.addEventListener("click", function(event) {
   const actionButton = event.target.closest("[data-cart-action]");
 
   if (actionButton) {
@@ -238,7 +249,7 @@ document.addEventListener("click", event => {
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function() {
   document.querySelectorAll("[data-checkout]").forEach(button => {
     button.addEventListener("click", sovaCheckout);
   });
