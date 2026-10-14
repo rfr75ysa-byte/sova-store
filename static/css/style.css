@@ -78,3 +78,23 @@ footer{padding:30px clamp(20px,6vw,88px);border-top:1px solid var(--line);displa
     position: relative;
     z-index: 2;
 }
+
+/* SOVA - Align perfume add button with price */
+.product-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.product-bottom button {
+    flex-shrink: 0;
+    align-self: center;
+    margin: 0;
+    transform: translateY(-4px);
+}
+
+.product-bottom strong {
+    align-self: center;
+    line-height: 1.4;
+}
