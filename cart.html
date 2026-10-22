@@ -6,27 +6,451 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#061629">
   <title>سلة المشتريات | SOVA</title>
+
   <link rel="stylesheet" href="static/css/style.css">
+
   <style>
-    .cart-page{max-width:1000px;margin:auto;padding:55px 22px 80px;min-height:70vh}
-    .cart-page h1{font-size:clamp(32px,5vw,48px);margin-bottom:8px}
-    .cart-subtitle{color:#91a8bf;margin-bottom:35px}
-    .cart-item{display:flex;align-items:center;gap:20px;padding:18px;margin-bottom:14px;background:linear-gradient(145deg,#102c47,#081727);border:1px solid rgba(154,204,238,.16)}
-    .cart-item img{flex-shrink:0}
-    .cart-item h3{margin:0 0 8px}
-    .cart-item p{color:#a7bdd0;font-size:13px}
-    .cart-item button{margin:4px;padding:6px 12px;border:1px solid #35b8ff66;background:transparent;color:#8cddff}
-    .cart-item button:hover{background:#35b8ff;color:#061629}
-    .cart-summary{margin-top:28px;padding:25px;border:1px solid rgba(154,204,238,.2);background:#0a2038}
-    .cart-summary h2{margin:0 0 20px}
-    #cart-total{color:#8cddff}
-    .cart-buttons{display:flex;gap:12px;flex-wrap:wrap}
-    .cart-buttons button,.cart-buttons a{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;font-weight:bold;border:0}
-    .checkout-button{background:#35b8ff;color:#061629}
-    .continue-button{border:1px solid #35b8ff66!important;background:transparent;color:#8cddff}
-    @media(max-width:500px){.cart-item{gap:10px;padding:10px}.cart-item img{width:65px!important;height:80px!important}.cart-item button{margin:3px;padding:6px 9px}}
+    :root {
+      --cart-bg: #061629;
+      --cart-panel: #0a2038;
+      --cart-blue: #35b8ff;
+      --cart-cyan: #8cddff;
+      --cart-text: #f5f8ff;
+      --cart-muted: #91a8bf;
+      --cart-border: rgba(140, 221, 255, 0.18);
+    }
+
+    body {
+      background-color: var(--cart-bg);
+      color: var(--cart-text);
+    }
+
+    .cart-page {
+      position: relative;
+      isolation: isolate;
+      max-width: 1100px;
+      min-height: 75vh;
+      margin: 0 auto;
+      padding: 65px 22px 85px;
+      overflow: hidden;
+    }
+
+    .cart-page::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      right: -180px;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(53, 184, 255, 0.12),
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    .cart-hero {
+      text-align: center;
+      margin-bottom: 42px;
+    }
+
+    .cart-symbol {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 20px;
+      border: 1px solid rgba(140, 221, 255, 0.4);
+      border-radius: 50%;
+      background: linear-gradient(145deg, #102e4b, #071626);
+      box-shadow: 0 0 35px rgba(53, 184, 255, 0.13);
+      color: var(--cart-cyan);
+      font-size: 30px;
+    }
+
+    .cart-hero .eyebrow {
+      color: var(--cart-cyan);
+      font-size: 11px;
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+    }
+
+    .cart-page h1 {
+      color: var(--cart-text);
+      font-size: clamp(30px, 5vw, 46px);
+      margin: 0 0 12px;
+    }
+
+    .cart-subtitle {
+      color: var(--cart-muted);
+      line-height: 1.9;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .cart-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(260px, 0.8fr);
+      align-items: start;
+      gap: 25px;
+    }
+
+    .cart-products {
+      min-width: 0;
+    }
+
+    .cart-section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .cart-section-heading h2 {
+      margin: 0;
+      font-size: 19px;
+    }
+
+    .cart-section-heading span {
+      color: var(--cart-muted);
+      font-size: 12px;
+    }
+
+    #cart-items {
+      display: grid;
+      gap: 15px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 20px;
+      margin: 0;
+      border: 1px solid var(--cart-border);
+      border-radius: 17px;
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(53, 184, 255, 0.08),
+          transparent 55%
+        ),
+        linear-gradient(145deg, #102c47, #081727);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .cart-item:hover {
+      border-color: rgba(53, 184, 255, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .cart-item > img {
+      flex: 0 0 100px;
+      width: 100px !important;
+      height: 120px !important;
+      object-fit: contain;
+      padding: 8px;
+      border: 1px solid rgba(140, 221, 255, 0.1);
+      border-radius: 12px;
+      background: rgba(2, 12, 24, 0.45);
+    }
+
+    .cart-item > div {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .cart-item h3 {
+      color: var(--cart-text);
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0 0 7px;
+    }
+
+    .cart-item p {
+      color: var(--cart-muted);
+      font-size: 13px;
+      line-height: 1.8;
+      margin: 7px 0;
+    }
+
+    .cart-item p:last-child {
+      color: var(--cart-cyan);
+      font-weight: 700;
+    }
+
+    .cart-item button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 34px;
+      min-height: 33px;
+      padding: 6px 11px;
+      margin: 5px 3px 2px 0;
+      border: 1px solid rgba(53, 184, 255, 0.35);
+      border-radius: 8px;
+      background: rgba(53, 184, 255, 0.06);
+      color: var(--cart-cyan);
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .cart-item button:hover {
+      background: var(--cart-blue);
+      color: #061629;
+    }
+
+    .cart-item button[data-cart-action="remove"] {
+      border-color: rgba(255, 115, 115, 0.3);
+      color: #ffaaaa;
+      background: rgba(255, 90, 90, 0.05);
+    }
+
+    .cart-item button[data-cart-action="remove"]:hover {
+      background: #c94c5b;
+      border-color: #c94c5b;
+      color: white;
+    }
+
+    #cart-items > p {
+      padding: 35px 20px;
+      margin: 0;
+      border: 1px dashed var(--cart-border);
+      border-radius: 16px;
+      color: var(--cart-muted);
+      background: rgba(10, 32, 56, 0.55);
+      text-align: center;
+      line-height: 2;
+    }
+
+    .cart-summary {
+      position: sticky;
+      top: 20px;
+      padding: 25px;
+      border: 1px solid rgba(53, 184, 255, 0.3);
+      border-radius: 18px;
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(53, 184, 255, 0.12),
+          transparent 60%
+        ),
+        linear-gradient(145deg, #0d2742, #071626);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.18);
+    }
+
+    .summary-label {
+      color: var(--cart-muted);
+      font-size: 12px;
+      margin: 0 0 8px;
+    }
+
+    .cart-summary h2 {
+      margin: 0 0 22px;
+      font-size: 21px;
+    }
+
+    .summary-divider {
+      height: 1px;
+      margin: 18px 0;
+      background: var(--cart-border);
+    }
+
+    .summary-total {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .summary-total strong {
+      color: var(--cart-cyan);
+      font-size: 18px;
+      text-align: left;
+    }
+
+    #cart-total {
+      color: var(--cart-cyan);
+    }
+
+    .delivery-note {
+      color: var(--cart-muted);
+      font-size: 12px;
+      line-height: 2;
+      margin: 15px 0 22px;
+    }
+
+    .cart-buttons {
+      display: grid;
+      gap: 11px;
+    }
+
+    .cart-buttons button,
+    .cart-buttons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      width: 100%;
+      min-height: 49px;
+      box-sizing: border-box;
+      padding: 13px 16px;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .checkout-button {
+      border: 1px solid var(--cart-blue);
+      background: linear-gradient(100deg, #35b8ff, #8cddff);
+      color: #061629;
+      box-shadow: 0 5px 20px rgba(53, 184, 255, 0.15);
+    }
+
+    .checkout-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(53, 184, 255, 0.25);
+    }
+
+    .continue-button {
+      border: 1px solid var(--cart-border);
+      background: transparent;
+      color: var(--cart-cyan);
+    }
+
+    .continue-button:hover {
+      border-color: var(--cart-blue);
+      background: rgba(53, 184, 255, 0.07);
+    }
+
+    .cart-trust {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+      color: var(--cart-muted);
+      font-size: 11px;
+    }
+
+    .cart-trust span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cart-trust b {
+      color: var(--cart-cyan);
+      font-weight: 400;
+    }
+
+    .cart-footer {
+      border-top: 1px solid var(--cart-border);
+      padding: 25px 15px;
+      text-align: center;
+      color: var(--cart-muted);
+      font-size: 12px;
+    }
+
+    .cart-footer p {
+      margin: 0 0 9px;
+    }
+
+    .cart-footer a {
+      color: var(--cart-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      .cart-page {
+        padding: 42px 15px 60px;
+      }
+
+      .cart-layout {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .cart-summary {
+        position: static;
+      }
+
+      .cart-hero {
+        margin-bottom: 30px;
+      }
+
+      .cart-symbol {
+        width: 65px;
+        height: 65px;
+        font-size: 26px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .cart-item {
+        align-items: flex-start;
+        gap: 11px;
+        padding: 12px;
+        border-radius: 13px;
+      }
+
+      .cart-item > img {
+        flex-basis: 75px;
+        width: 75px !important;
+        height: 100px !important;
+        padding: 4px;
+      }
+
+      .cart-item h3 {
+        font-size: 14px;
+      }
+
+      .cart-item p {
+        font-size: 12px;
+      }
+
+      .cart-item button {
+        min-width: 30px;
+        min-height: 31px;
+        padding: 5px 8px;
+        font-size: 12px;
+      }
+
+      .cart-summary {
+        padding: 20px 17px;
+      }
+
+      .cart-trust {
+        gap: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cart-item,
+      .cart-item button,
+      .cart-buttons button,
+      .cart-buttons a {
+        transition: none;
+      }
+    }
   </style>
 </head>
+
 <body>
   <header class="header">
     <a class="logo" href="index.html">SOVA<span>®</span></a>
@@ -38,32 +462,72 @@
   </header>
 
   <main class="cart-page">
-    <p class="eyebrow">YOUR SOVA SELECTION</p>
-    <h1>سلة المشتريات</h1>
-    <p class="cart-subtitle">اختار عطرك المفضل وخلي الباقي علينا 💙</p>
+    <section class="cart-hero">
+      <div class="cart-symbol" aria-hidden="true">♧</div>
+      <p class="eyebrow">YOUR SOVA SELECTION</p>
+      <h1>سلة المشتريات</h1>
+      <p class="cart-subtitle">
+        كل عطر تختاره يحكي قصة مختلفة.<br>
+        اختار عطرك المفضل وخلي الباقي علينا 💙
+      </p>
+    </section>
 
-    <div id="cart-items">
-      <p>جاري تحميل السلة...</p>
+    <div class="cart-layout">
+      <section class="cart-products">
+        <div class="cart-section-heading">
+          <h2>عطورك المختارة</h2>
+          <span>اختياراتك من SOVA</span>
+        </div>
+
+        <div id="cart-items">
+          <p>جاري تحميل السلة...</p>
+        </div>
+      </section>
+
+      <aside class="cart-summary">
+        <p class="summary-label">SOVA CHECKOUT</p>
+        <h2>ملخص الطلب</h2>
+
+        <div class="summary-divider"></div>
+
+        <div class="summary-total">
+          <span>المجموع الكلي</span>
+          <strong id="cart-total">0 د.ع</strong>
+        </div>
+
+        <p class="delivery-note">
+          أجور التوصيل، إن وجدت، يتم تأكيدها عند التواصل.
+          راح نراجع تفاصيل طلبك وياك قبل إتمامه.
+        </p>
+
+        <div class="cart-buttons">
+          <button type="button" class="checkout-button" data-checkout>
+            <span aria-hidden="true">↗</span>
+            أكمل الطلب عبر واتساب
+          </button>
+
+          <a href="index.html#collection" class="continue-button">
+            متابعة التسوق
+            <span aria-hidden="true">←</span>
+          </a>
+        </div>
+
+        <div class="summary-divider"></div>
+
+        <p class="delivery-note" style="margin-bottom:0">
+          💙 شكراً لاختيارك SOVA — مو مجرد عطر، هذا حضور.
+        </p>
+      </aside>
     </div>
 
-    <section class="cart-summary">
-      <h2>ملخص الطلب</h2>
-      <p>المجموع الكلي: <strong id="cart-total">0 د.ع</strong></p>
-      <p style="color:#91a8bf;font-size:12px;line-height:1.9">
-        أجور التوصيل، إن وجدت، يتم تأكيدها عند التواصل.
-      </p>
-      <div class="cart-buttons">
-        <button type="button" class="checkout-button" data-checkout>
-          أكمل الطلب عبر واتساب
-        </button>
-        <a href="index.html#collection" class="continue-button">
-          متابعة التسوق
-        </a>
-      </div>
-    </section>
+    <div class="cart-trust">
+      <span><b>✦</b> عطور مختارة بعناية</span>
+      <span><b>✦</b> تأكيد الطلب عبر واتساب</span>
+      <span><b>✦</b> خدمة زبائن مباشرة</span>
+    </div>
   </main>
 
-  <footer>
+  <footer class="cart-footer">
     <p>© SOVA — الفخامة تبدأ من التفاصيل</p>
     <a href="https://wa.me/9647806364447">تواصل ويانا</a>
   </footer>
