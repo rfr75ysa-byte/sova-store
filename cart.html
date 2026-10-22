@@ -5,8 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#061629">
-  <title>تفاصيل العطر | SOVA</title>
+  <title>سلة المشتريات | SOVA</title>
+
   <link rel="icon" type="image/svg+xml" href="/static/images/sova-icon.svg">
+  <link rel="stylesheet" href="/static/css/style.css">
 
   <style>
     :root {
@@ -16,335 +18,197 @@
       --cyan: #8cddff;
       --text: #f5f8ff;
       --muted: #91a8bf;
-      --border: rgba(140, 221, 255, .17);
-    }
-
-    * {
-      box-sizing: border-box;
     }
 
     body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, Tahoma, sans-serif;
+      background-color: var(--bg);
       color: var(--text);
-      background:
-        radial-gradient(ellipse at 15% 10%, rgba(17, 104, 157, .25), transparent 42%),
-        radial-gradient(ellipse at 85% 80%, rgba(0, 114, 171, .16), transparent 45%),
-        linear-gradient(145deg, #061629, #071c32 55%, #03101e);
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .header {
-      width: 100%;
-      min-height: 82px;
-      padding: 14px 6%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(4, 18, 33, .86);
-      backdrop-filter: blur(14px);
-    }
-
-    .logo {
-      display: inline-flex;
+    .header .logo {
+      display: inline-flex !important;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      text-decoration: none;
     }
 
-    .logo-image {
-      display: block;
-      width: 58px;
-      height: 58px;
+    .header .logo-image {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      width: 58px !important;
+      height: 58px !important;
+      min-width: 58px;
       object-fit: contain;
     }
 
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 22px;
+    .cart-page {
+      max-width: 1000px;
+      margin: auto;
+      padding: 55px 22px 80px;
+      min-height: 70vh;
     }
 
-    nav a {
-      color: #dcecff;
-      font-size: 14px;
-      transition: color .25s;
+    .cart-page h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      margin-bottom: 8px;
     }
 
-    nav a:hover {
-      color: var(--cyan);
-    }
-
-    #cart-count {
-      color: var(--cyan);
-      margin-right: 3px;
-    }
-
-    .page {
-      width: min(1120px, 92%);
-      margin: 45px auto 70px;
-    }
-
-    .back-link {
-      display: inline-block;
-      color: var(--cyan);
-      margin-bottom: 25px;
-      font-size: 14px;
-    }
-
-    .product-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 42px;
-      align-items: start;
-    }
-
-    .product-visual {
-      position: relative;
-      overflow: hidden;
-      min-height: 430px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 28px;
-      border-radius: 24px;
-      border: 1px solid var(--border);
-      background:
-        radial-gradient(ellipse at 50% 45%, rgba(53, 184, 255, .16), transparent 60%),
-        linear-gradient(145deg, rgba(13, 43, 68, .95), rgba(4, 18, 33, .95));
-      box-shadow: 0 18px 55px rgba(0, 0, 0, .2);
-    }
-
-    .product-visual::before,
-    .product-visual::after {
-      content: "";
-      position: absolute;
-      border: 1px solid rgba(140, 221, 255, .09);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .product-visual::before {
-      width: 310px;
-      height: 310px;
-    }
-
-    .product-visual::after {
-      width: 240px;
-      height: 240px;
-    }
-
-    .product-visual img {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 350px;
-      height: 365px;
-      object-fit: contain;
-      filter: drop-shadow(0 15px 25px rgba(0, 0, 0, .35));
-    }
-
-    .product-info {
-      padding: 8px 0;
-    }
-
-    .eyebrow {
-      color: var(--cyan);
-      font-size: 12px;
-      letter-spacing: 3px;
-      margin-bottom: 14px;
-    }
-
-    h1 {
-      font-size: clamp(28px, 4vw, 43px);
-      line-height: 1.3;
-      margin: 0 0 12px;
-    }
-
-    .subtitle {
+    .cart-subtitle {
       color: var(--muted);
+      margin-bottom: 35px;
       line-height: 1.8;
-      margin: 0 0 22px;
     }
 
-    .price {
-      color: var(--cyan);
-      font-size: 28px;
-      font-weight: bold;
-      margin: 18px 0;
-    }
-
-    .description {
-      color: #d4e2f0;
-      line-height: 2;
-      font-size: 15px;
-    }
-
-    .actions {
+    .cart-item {
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin: 25px 0 30px;
+      align-items: center;
+      gap: 20px;
+      padding: 18px;
+      margin-bottom: 14px;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #102c47, #081727);
+      border: 1px solid rgba(154, 204, 238, .16);
     }
 
-    .btn {
+    .cart-item img {
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+
+    .cart-item h3 {
+      margin: 0 0 8px;
+    }
+
+    .cart-item p {
+      color: #a7bdd0;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .cart-item button {
+      margin: 4px;
+      padding: 7px 12px;
+      border: 1px solid #35b8ff66;
+      border-radius: 7px;
+      background: transparent;
+      color: var(--cyan);
+      cursor: pointer;
+    }
+
+    .cart-item button:hover {
+      background: var(--blue);
+      color: var(--bg);
+    }
+
+    .cart-summary {
+      margin-top: 28px;
+      padding: 25px;
+      border-radius: 16px;
+      border: 1px solid rgba(154, 204, 238, .2);
+      background: var(--panel);
+    }
+
+    .cart-summary h2 {
+      margin: 0 0 20px;
+    }
+
+    #cart-total {
+      color: var(--cyan);
+    }
+
+    .cart-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .cart-buttons button,
+    .cart-buttons a {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 48px;
-      padding: 13px 22px;
-      border: 1px solid var(--blue);
-      border-radius: 12px;
-      background: linear-gradient(135deg, #35b8ff, #1484c8);
-      color: #041626;
+      padding: 14px 20px;
+      border-radius: 9px;
       font-weight: bold;
-      font-size: 14px;
+      text-decoration: none;
       cursor: pointer;
-      transition: transform .2s, box-shadow .2s;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(53, 184, 255, .2);
+    .checkout-button {
+      background: var(--blue);
+      color: var(--bg);
+      border: 0;
     }
 
-    .btn.secondary {
+    .continue-button {
+      border: 1px solid #35b8ff66;
       background: transparent;
       color: var(--cyan);
     }
 
-    .notes-section {
-      margin-top: 55px;
-    }
-
-    .section-title {
-      font-size: 24px;
-      margin: 0 0 10px;
-    }
-
-    .section-subtitle {
-      color: var(--muted);
-      line-height: 1.8;
-      margin: 0 0 25px;
-    }
-
-    .notes-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .note-card {
-      padding: 22px;
-      border: 1px solid var(--border);
-      border-radius: 17px;
-      background: linear-gradient(145deg, rgba(10, 32, 56, .95), rgba(5, 22, 39, .92));
-    }
-
-    .note-number {
-      color: var(--blue);
-      font-size: 12px;
-      letter-spacing: 2px;
-    }
-
-    .note-card h3 {
-      margin: 10px 0;
-      font-size: 18px;
-    }
-
-    .note-card p {
-      color: #c0d1e2;
-      line-height: 2;
-      font-size: 14px;
-      margin: 0;
-    }
-
-    .extra-info {
-      margin-top: 25px;
-      padding: 20px;
-      border: 1px solid var(--border);
+    .empty-cart {
+      padding: 30px 20px;
+      text-align: center;
+      border: 1px solid rgba(154, 204, 238, .16);
       border-radius: 15px;
-      color: var(--muted);
-      line-height: 1.9;
-      background: rgba(10, 32, 56, .6);
-    }
-
-    .error {
-      padding: 45px 20px;
-      text-align: center;
-      border: 1px solid var(--border);
-      border-radius: 18px;
       background: var(--panel);
-    }
-
-    footer {
-      padding: 25px 15px;
-      text-align: center;
       color: var(--muted);
-      border-top: 1px solid var(--border);
-      font-size: 13px;
+      line-height: 2;
     }
 
-    @media (max-width: 760px) {
+    @media (max-width: 650px) {
       .header {
-        padding: 12px 4%;
-        flex-direction: column;
         gap: 12px;
       }
 
-      .logo-image {
-        width: 52px;
-        height: 52px;
+      .header .logo-image {
+        width: 50px !important;
+        height: 50px !important;
+        min-width: 50px;
       }
 
-      nav {
-        gap: 14px;
+      .cart-page {
+        padding: 35px 15px 55px;
       }
 
-      nav a {
-        font-size: 13px;
+      .cart-item {
+        gap: 10px;
+        padding: 10px;
       }
 
-      .page {
-        margin-top: 28px;
+      .cart-item img {
+        width: 65px !important;
+        height: 80px !important;
       }
 
-      .product-layout {
-        grid-template-columns: 1fr;
-        gap: 25px;
+      .cart-item button {
+        margin: 3px;
+        padding: 6px 9px;
       }
 
-      .product-visual {
-        min-height: 330px;
+      .cart-buttons {
+        flex-direction: column;
       }
 
-      .product-visual img {
-        height: 290px;
-      }
-
-      .notes-grid {
-        grid-template-columns: 1fr;
+      .cart-buttons button,
+      .cart-buttons a {
+        width: 100%;
       }
     }
   </style>
 </head>
 
 <body>
+
   <header class="header">
     <a class="logo" href="/index.html" aria-label="SOVA - الرئيسية">
       <img
+        class="logo-image"
         src="/static/images/sova-icon.svg"
         alt="SOVA"
-        class="logo-image"
         onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span style=&quot;color:#8cddff;font-weight:bold;font-size:25px&quot;>SOVA®</span>')"
       >
     </a>
@@ -353,281 +217,50 @@
       <a href="/index.html">الرئيسية</a>
       <a href="/index.html#about">من نحن</a>
       <a href="/index.html#collection">عطورنا</a>
-      <a href="/cart.html">السلة 🛒 <b id="cart-count">0</b></a>
+      <a href="/cart.html">السلة 🛒 (<span data-cart-count>0</span>)</a>
     </nav>
   </header>
 
-  <main class="page">
-    <a class="back-link" href="/index.html#collection">← الرجوع إلى العطور</a>
+  <main class="cart-page">
+    <p class="eyebrow">YOUR SOVA SELECTION</p>
+    <h1>سلة المشتريات</h1>
+    <p class="cart-subtitle">
+      اختار عطرك المفضل وخلي الباقي علينا 💙
+    </p>
 
-    <div id="product-container">
-      <div class="error">جاري تحميل تفاصيل العطر...</div>
+    <div id="cart-items">
+      <p>جاري تحميل السلة...</p>
     </div>
+
+    <section class="cart-summary">
+      <h2>ملخص الطلب</h2>
+
+      <p>
+        المجموع الكلي:
+        <strong id="cart-total">0 د.ع</strong>
+      </p>
+
+      <p style="color:#91a8bf;font-size:12px;line-height:1.9">
+        أجور التوصيل، إن وجدت، يتم تأكيدها عند التواصل.
+      </p>
+
+      <div class="cart-buttons">
+        <button type="button" class="checkout-button" data-checkout>
+          أكمل الطلب عبر واتساب
+        </button>
+
+        <a href="/index.html#collection" class="continue-button">
+          متابعة التسوق
+        </a>
+      </div>
+    </section>
   </main>
 
   <footer>
-    SOVA® — THE ART OF PERFUMERY
-    <br>
-    الفخامة تبدأ من التفاصيل
+    <p>© SOVA — الفخامة تبدأ من التفاصيل</p>
+    <a href="https://wa.me/9647806364447">تواصل ويانا</a>
   </footer>
 
   <script src="/static/js/app.js"></script>
-
-  <script>
-    const products = {
-      "afnan": {
-        name: "Afnan 9 PM",
-        price: 65000,
-        image: "/static/images/AFNAN.jpg",
-        description: "عطر مميز لمحبي الروائح الجذابة والحضور القوي.",
-        year: "2020",
-        type: "شرقي - فانيلا | رجالي",
-        perfumer: "Afnan",
-        top: ["التفاح", "القرفة", "الخزامى البرية", "البرغموت"],
-        heart: ["زهر البرتقال", "زنبق الوادي"],
-        base: ["الفانيلا", "حبوب التونكا", "العنبر", "الباتشولي"]
-      },
-
-      "night-out": {
-        name: "Afnan 9 PM Night Out",
-        price: 65000,
-        image: "/static/images/night-out.jpg",
-        description: "تركيبة عطرية بطابع مميز تجمع بين النفحات الفاكهية والتوابل والدفء.",
-        year: "2026",
-        type: "شرقي - متبل | للجنسين",
-        perfumer: "Quentin Roussel و Imran Fazlani",
-        top: ["فاكهة التنين", "الكونياك", "الخزامى", "التفاح", "البرغموت"],
-        heart: ["التوفي", "الجلد السويدي", "الهيل", "خشب الأرز", "ماهونيال"],
-        base: ["التونكا", "أكيغالاوود", "أمبروفكس", "الباتشولي"]
-      },
-
-      "asad": {
-        name: "Lattafa Asad",
-        price: 45000,
-        image: "/static/images/ASAD.jpg",
-        description: "عطر رجالي بطابع دافئ وجذاب، يجمع بين التوابل والأخشاب والفانيلا.",
-        year: "2021",
-        type: "شرقي | رجالي",
-        perfumer: "Lattafa",
-        top: ["الفلفل الأسود", "التبغ", "الأناناس"],
-        heart: ["الباتشولي", "القهوة", "السوسن"],
-        base: ["الفانيلا", "العنبر", "الأخشاب الجافة", "البنزوين", "اللادن"]
-      },
-
-      "freeze": {
-        name: "Riiffs Freeze",
-        price: 50000,
-        image: "/static/images/FREEZE RIIFFS.jpg",
-        description: "انتعاش بارد ولمسات حمضية وعطرية تمنحك إحساساً بالحيوية.",
-        year: "2025",
-        type: "زهري - فاكهي | للجنسين",
-        perfumer: "Shinichiro Oba",
-        top: ["النعناع السنبلي", "قشر الليمون", "برغموت كالابريا", "الجريب فروت", "الثلج"],
-        heart: ["الثلج", "الشاي", "الزنجبيل", "المريمية"],
-        base: ["Ambermax", "الفاوانيا", "خشب الأرز"]
-      },
-
-      "flames": {
-        name: "Riiffs Freeze In Flames",
-        price: 50000,
-        image: "/static/images/FREEZE IN FLAMES RIIFFS.jpg",
-        description: "مزيج فاكهي منعش بطابع جريء ولمسات عطرية مميزة.",
-        year: "2025",
-        type: "عطري - فاكهي | للجنسين",
-        perfumer: "Shinichiro Oba",
-        top: ["التوت الأحمر", "النعناع السنبلي", "التفاح الأحمر", "برغموت كالابريا", "الباشن فروت"],
-        heart: ["النعناع السنبلي", "الخزامى", "الشاي", "المريمية"],
-        base: ["المسك", "خشب الأرز"]
-      },
-
-      "supremacy-ce": {
-        name: "Afnan Supremacy Collector’s Edition Pour Homme",
-        price: 70000,
-        image: "/static/images/supremacy-ce.jpg",
-        description: "عطر بطابع فاكهي خشبي أنيق، يجمع بين الانتعاش والعمق.",
-        year: "2024",
-        type: "شيبر - فاكهي | رجالي",
-        perfumer: "Imran Fazlani",
-        top: ["الأناناس", "البرغموت", "الزهور البيضاء", "التفاح"],
-        heart: ["زهر البرتقال", "خشب البتولا", "العنبر"],
-        base: ["طحلب البلوط", "المسك", "العنبر"]
-      },
-
-      "hawas-ice": {
-        name: "Rasasi Hawas Ice",
-        price: 45000,
-        image: "/static/images/hawas-ice.jpg",
-        description: "عطر منعش بطابع فاكهي وعطري مع قاعدة دافئة من المسك والعنبر.",
-        year: "2023",
-        type: "عطري | رجالي",
-        perfumer: "Rasasi",
-        top: ["التفاح", "الليمون الإيطالي", "البرغموت الصقلي", "اليانسون النجمي"],
-        heart: ["البرقوق", "زهر البرتقال", "الهيل"],
-        base: ["المسك", "العنبر", "خشب الطافية", "الطحلب"]
-      },
-
-      "hawas-black": {
-        name: "Rasasi Hawas Black",
-        price: 45000,
-        image: "/static/images/hawas-black.jpg",
-        description: "تركيبة فاكهية خشبية بطابع قوي ومتوازن.",
-        year: "2024",
-        type: "عطري - فاكهي | رجالي",
-        perfumer: "Rasasi",
-        top: ["البرغموت", "الأناناس", "الجريب فروت"],
-        heart: ["الباتشولي", "خشب الأرز", "الياسمين"],
-        base: ["طحلب البلوط", "الأخشاب", "العنبر"]
-      },
-
-      "hawas-kobra": {
-        name: "Rasasi Hawas Kobra",
-        price: 45000,
-        image: "/static/images/hawas-kobra.jpg",
-        description: "عطر بطابع خشبي شرقي، يجمع بين التوابل والنفحات العطرية الدافئة.",
-        year: "2025",
-        type: "شرقي - خشبي | رجالي",
-        perfumer: "Rasasi",
-        top: ["الزنجبيل", "البرغموت", "اليوسفي"],
-        heart: ["الشاي الأخضر", "النيرولي", "القرفة"],
-        base: ["المسك", "الأخشاب", "العنبر"]
-      }
-    };
-
-    function getProductId() {
-      const params = new URLSearchParams(window.location.search);
-      return params.get("id") || params.get("product") || "";
-    }
-
-    function renderNotes(title, number, notes) {
-      return `
-        <article class="note-card">
-          <span class="note-number">${number}</span>
-          <h3>${title}</h3>
-          <p>${notes.join(" • ")}</p>
-        </article>
-      `;
-    }
-
-    function renderProduct() {
-      const id = getProductId();
-      const product = products[id];
-      const container = document.getElementById("product-container");
-
-      if (!product) {
-        container.innerHTML = `
-          <div class="error">
-            <h2>ما لكينا هذا العطر</h2>
-            <p>ارجع لمجموعة عطور SOVA واختار العطر اللي تريده.</p>
-            <a class="btn" href="/index.html#collection">عرض العطور</a>
-          </div>
-        `;
-        return;
-      }
-
-      document.title = product.name + " | SOVA";
-
-      container.innerHTML = `
-        <section class="product-layout">
-          <div class="product-visual">
-            <img
-              src="${product.image}"
-              alt="${product.name}"
-              onerror="this.onerror=null;this.src='/static/images/sova-icon.svg';"
-            >
-          </div>
-
-          <div class="product-info">
-            <div class="eyebrow">SOVA® — THE ART OF PERFUMERY</div>
-            <h1>${product.name}</h1>
-            <p class="subtitle">${product.type}</p>
-            <div class="price">${product.price.toLocaleString("en-US")} د.ع</div>
-            <p class="description">${product.description}</p>
-
-            <div class="actions">
-              <button class="btn" onclick="addProductToCart('${id}')">
-                أضف إلى السلة 🛒
-              </button>
-              <a class="btn secondary" href="/cart.html">عرض السلة</a>
-            </div>
-
-            <div class="extra-info">
-              <strong>معلومات العطر</strong><br>
-              سنة الإصدار: ${product.year}<br>
-              العائلة العطرية: ${product.type}<br>
-              صانع العطر / العلامة: ${product.perfumer}
-            </div>
-          </div>
-        </section>
-
-        <section class="notes-section">
-          <h2 class="section-title">الهرم العطري</h2>
-          <p class="section-subtitle">
-            اكتشف تفاصيل الرائحة من أول نفحة إلى النفحات العميقة والثابتة.
-          </p>
-
-          <div class="notes-grid">
-            ${renderNotes("مقدمة العطر", "01 — TOP NOTES", product.top)}
-            ${renderNotes("قلب العطر", "02 — HEART NOTES", product.heart)}
-            ${renderNotes("قاعدة العطر", "03 — BASE NOTES", product.base)}
-          </div>
-        </section>
-      `;
-    }
-
-    function addProductToCart(id) {
-      const product = products[id];
-
-      if (!product) return;
-
-      try {
-        if (typeof window.sovaAddToCart === "function") {
-          window.sovaAddToCart(id);
-        } else if (typeof window.addToCart === "function") {
-          window.addToCart(id);
-        } else {
-          const cart = JSON.parse(localStorage.getItem("sova_cart") || "[]");
-          const existing = cart.find(item => item.id === id);
-
-          if (existing) {
-            existing.quantity = (Number(existing.quantity) || 1) + 1;
-          } else {
-            cart.push({
-              id: id,
-              name: product.name,
-              price: product.price,
-              image: product.image,
-              quantity: 1
-            });
-          }
-
-          localStorage.setItem("sova_cart", JSON.stringify(cart));
-        }
-
-        updateCartCount();
-
-        alert("تمت إضافة العطر إلى السلة 🛒");
-      } catch (error) {
-        alert("ما كدرنا نضيف العطر للسلة. حاول مرة ثانية.");
-      }
-    }
-
-    function updateCartCount() {
-      try {
-        const cart = JSON.parse(localStorage.getItem("sova_cart") || "[]");
-        const count = cart.reduce((total, item) => {
-          return total + (Number(item.quantity) || 1);
-        }, 0);
-
-        const counter = document.getElementById("cart-count");
-        if (counter) counter.textContent = count;
-      } catch (error) {
-        const counter = document.getElementById("cart-count");
-        if (counter) counter.textContent = "0";
-      }
-    }
-
-    renderProduct();
-    updateCartCount();
-  </script>
 </body>
 </html>
