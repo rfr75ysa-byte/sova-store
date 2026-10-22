@@ -1,31 +1,36 @@
-```html
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#061629">
+  <meta name="description" content="اكتشف تفاصيل العطور ونوتاتها العطرية في SOVA.">
   <title>تفاصيل العطر | SOVA</title>
   <link rel="stylesheet" href="static/css/style.css">
 
   <style>
     .details {
-      max-width: 1100px;
+      max-width: 1180px;
       margin: auto;
-      padding: 65px 24px;
+      padding: 55px 24px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 55px;
-      align-items: center;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 38px;
+      align-items: start;
       min-height: 75vh;
     }
 
     .details-image {
+      position: sticky;
+      top: 25px;
       min-height: 420px;
       display: grid;
       place-items: center;
-      background: radial-gradient(ellipse, #17476b, transparent 68%);
+      background:
+        radial-gradient(ellipse at center, #17476b 0%, #0a2038 48%, transparent 78%);
       border: 1px solid rgba(154, 204, 238, .16);
+      border-radius: 18px;
       overflow: hidden;
     }
 
@@ -35,28 +40,35 @@
       object-fit: contain;
       padding: 25px;
       box-sizing: border-box;
+      filter: drop-shadow(0 15px 28px rgba(0, 0, 0, .3));
+      transition: transform .4s ease;
+    }
+
+    .details-image img:hover {
+      transform: scale(1.035);
     }
 
     .details-info .eyebrow {
       color: #35b8ff;
       letter-spacing: 2px;
+      font-size: 12px;
     }
 
     .details-info h1 {
-      font-size: clamp(30px, 5vw, 52px);
-      margin: 15px 0;
+      font-size: clamp(28px, 4vw, 45px);
+      margin: 12px 0;
     }
 
-    .details-info p {
+    .details-info > p:not(.eyebrow):not(.notice) {
       color: #a7bdd0;
       line-height: 2;
     }
 
     .details-price {
       display: block;
-      font-size: 24px;
+      font-size: 25px;
       color: #8cddff;
-      margin: 25px 0;
+      margin: 22px 0;
     }
 
     .details-actions {
@@ -68,10 +80,18 @@
     .details-actions button,
     .details-actions a {
       border: 0;
-      padding: 14px 22px;
+      border-radius: 8px;
+      padding: 13px 20px;
       font-weight: bold;
       text-decoration: none;
       cursor: pointer;
+      transition: transform .2s, opacity .2s;
+    }
+
+    .details-actions button:hover,
+    .details-actions a:hover {
+      transform: translateY(-2px);
+      opacity: .9;
     }
 
     .add-button {
@@ -88,23 +108,220 @@
     .notice {
       color: #8cddff !important;
       font-size: 13px;
-      min-height: 25px;
+      min-height: 24px;
+      line-height: 1.8;
     }
 
-    @media (max-width: 700px) {
+    /* SOVA Fragrance Pyramid */
+
+    .sova-pyramid {
+      margin-top: 34px;
+      padding: 23px 18px;
+      border: 1px solid rgba(140, 221, 255, .2);
+      border-radius: 16px;
+      background:
+        radial-gradient(ellipse at top, rgba(35, 119, 164, .14), transparent 75%),
+        rgba(6, 22, 41, .65);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, .12);
+    }
+
+    .pyramid-heading {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .pyramid-heading small {
+      display: block;
+      color: #35b8ff;
+      font-size: 10px;
+      letter-spacing: 3px;
+      margin-bottom: 7px;
+    }
+
+    .pyramid-heading h2 {
+      font-size: 25px;
+      margin: 0 0 8px;
+      color: #f5f8ff;
+    }
+
+    .pyramid-heading p {
+      color: #91a8bf;
+      font-size: 12px;
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    .pyramid-levels {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .pyramid-level {
+      position: relative;
+      width: 100%;
+      padding: 17px 13px;
+      box-sizing: border-box;
+      border: 1px solid rgba(255, 255, 255, .1);
+      text-align: center;
+      overflow: hidden;
+      transition: border-color .25s, transform .25s;
+    }
+
+    .pyramid-level:hover {
+      border-color: rgba(255, 255, 255, .4);
+      transform: translateY(-2px);
+    }
+
+    .pyramid-level.top {
+      width: 72%;
+      background: linear-gradient(135deg, #17496c, #216e94);
+      clip-path: polygon(15% 0, 85% 0, 100% 100%, 0 100%);
+      padding-left: 22px;
+      padding-right: 22px;
+    }
+
+    .pyramid-level.middle {
+      width: 86%;
+      background: linear-gradient(135deg, #125577, #18799a);
+      clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
+      padding-left: 22px;
+      padding-right: 22px;
+    }
+
+    .pyramid-level.base {
+      width: 100%;
+      background: linear-gradient(135deg, #10354f, #15516c);
+      border-bottom: 2px solid #35b8ff;
+    }
+
+    .level-number {
+      display: block;
+      color: #a8e5ff;
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-bottom: 5px;
+    }
+
+    .level-title {
+      display: block;
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .note-list {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .note-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 10px;
+      border-radius: 6px;
+      background: rgba(3, 19, 34, .42);
+      border: 1px solid rgba(176, 226, 255, .15);
+      color: #eff9ff;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .note-symbol {
+      color: #8cddff;
+      font-size: 15px;
+      line-height: 1;
+    }
+
+    .pyramid-connector {
+      width: 1px;
+      height: 9px;
+      background: linear-gradient(#35b8ff, rgba(53, 184, 255, .15));
+    }
+
+    .pyramid-footnote {
+      text-align: center;
+      font-size: 11px;
+      color: #91a8bf;
+      line-height: 1.8;
+      margin: 17px 0 0;
+    }
+
+    .pyramid-unavailable {
+      padding: 22px 15px;
+      border: 1px solid rgba(140, 221, 255, .13);
+      border-radius: 10px;
+      color: #a7bdd0;
+      text-align: center;
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .pyramid-unavailable span {
+      display: block;
+      color: #8cddff;
+      font-size: 23px;
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 760px) {
       .details {
         grid-template-columns: 1fr;
         gap: 25px;
-        padding: 35px 18px;
+        padding: 30px 16px;
       }
 
       .details-image {
+        position: relative;
+        top: auto;
         min-height: 300px;
         height: 300px;
       }
 
       .details-image img {
         height: 300px;
+      }
+
+      .details-info h1 {
+        font-size: 31px;
+      }
+
+      .sova-pyramid {
+        margin-top: 28px;
+        padding: 20px 10px;
+      }
+
+      .pyramid-level {
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
+
+      .pyramid-level.top {
+        width: 76%;
+      }
+
+      .pyramid-level.middle {
+        width: 89%;
+      }
+
+      .note-chip {
+        font-size: 11px;
+        padding: 6px 8px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .details-image img,
+      .pyramid-level,
+      .details-actions button,
+      .details-actions a {
+        transition: none;
       }
     }
   </style>
@@ -134,6 +351,7 @@
     <section class="details-info">
       <p class="eyebrow">SOVA PERFUME COLLECTION</p>
       <h1 id="perfume-name">Afnan 9 PM</h1>
+
       <p id="perfume-description">
         عطر مميز لمحبي الروائح الجذابة والحضور القوي.
       </p>
@@ -153,6 +371,21 @@
       </div>
 
       <p class="notice" id="notice" aria-live="polite"></p>
+
+      <section class="sova-pyramid" id="sova-pyramid"
+               aria-labelledby="pyramid-title">
+        <div class="pyramid-heading">
+          <small>SOVA • SCENT PROFILE</small>
+          <h2 id="pyramid-title">الهرم العطري</h2>
+          <p>رحلة الرائحة من أول رشة إلى المكونات الأساسية</p>
+        </div>
+
+        <div id="pyramid-content" aria-live="polite"></div>
+
+        <p class="pyramid-footnote">
+          تطوّر الرائحة يختلف حسب البشرة والطقس وطريقة الاستخدام.
+        </p>
+      </section>
     </section>
   </main>
 
@@ -169,69 +402,97 @@
         name: "Afnan 9 PM",
         price: 65000,
         image: "static/images/AFNAN.jpg",
-        description: "عطر مميز لمحبي الروائح الجذابة والحضور القوي."
+        description: "عطر مميز لمحبي الروائح الجذابة والحضور القوي.",
+        notes: {
+          top: ["التفاح", "القرفة", "الخزامى البري", "البرغموت"],
+          middle: ["زهر البرتقال", "زنبق الوادي"],
+          base: ["الفانيليا", "حبوب التونكا", "العنبر", "الباتشولي"]
+        }
       },
 
       "night-out": {
         name: "Afnan 9 PM Night Out",
         price: 65000,
         image: "static/images/night-out.jpg",
-        description: "طابع مسائي مميز لمحبي الروائح الجريئة."
+        description: "طابع مسائي مميز لمحبي الروائح الجريئة.",
+        notes: null
       },
 
       "freeze": {
         name: "Freeze Riiffs",
         price: 50000,
         image: "static/images/FREEZE RIIFFS.jpg",
-        description: "عطر مميز لمحبي الروائح المنعشة والحضور الأنيق."
+        description: "عطر مميز لمحبي الروائح المنعشة والحضور الأنيق.",
+        notes: {
+          top: ["النعناع المدبب", "قشر الليمون", "برغموت كالابريا", "الجريب فروت", "الثلج"],
+          middle: ["الثلج", "الشاي", "الزنجبيل", "المريمية"],
+          base: ["أمبرماكس", "الفاوانيا", "خشب الأرز"]
+        }
       },
 
       "flames": {
         name: "Freeze In Flames Riiffs",
         price: 50000,
         image: "static/images/FREEZE IN FLAMES RIIFFS.jpg",
-        description: "عطر بطابع مميز لإطلالة مختلفة."
+        description: "عطر يجمع بين الفواكه المنعشة والنعناع والدفء الخشبي.",
+        notes: {
+          top: ["التوت الأحمر", "النعناع المدبب", "التفاح الأحمر", "برغموت كالابريا", "الباشن فروت", "رقائق الثلج"],
+          middle: ["النعناع المدبب", "الخزامى", "الشاي", "المريمية"],
+          base: ["المسك", "خشب الأرز", "أمبر إكستريم"]
+        }
       },
 
       "asad": {
         name: "Lattafa Asad",
         price: 45000,
         image: "static/images/ASAD.jpg",
-        description: "عطر رجالي بطابع دافئ وجذاب."
+        description: "عطر رجالي بطابع دافئ وجذاب.",
+        notes: {
+          top: ["الفلفل الأسود", "التبغ", "الأناناس"],
+          middle: ["الباتشولي", "القهوة", "السوسن"],
+          base: ["الفانيليا", "العنبر", "الأخشاب الجافة", "البنزوين", "اللابدانوم"]
+        }
       },
 
       "supremacy-ce": {
         name: "Supremacy Collector's Edition",
         price: 70000,
         image: "static/images/supremacy-ce.jpg",
-        description: "عطر أنيق بطابع مميز وحضور قوي."
+        description: "عطر أنيق بطابع مميز وحضور قوي.",
+        notes: {
+          top: ["الأناناس", "البرغموت", "التفاح", "الزهور البيضاء"],
+          middle: ["زهر البرتقال", "خشب البتولا", "العنبر"],
+          base: ["طحلب البلوط", "المسك", "العنبر الرمادي"]
+        }
       },
 
       "hawas-ice": {
         name: "Hawas Ice",
         price: 45000,
         image: "static/images/hawas-ice.jpg",
-        description: "انتعاش بارد بطابع عصري."
+        description: "انتعاش بارد بطابع عصري.",
+        notes: null
       },
 
       "hawas-black": {
         name: "Hawas Black",
         price: 45000,
         image: "static/images/hawas-black.jpg",
-        description: "طابع غامض لمحبي الروائح القوية."
+        description: "طابع غامض لمحبي الروائح القوية.",
+        notes: null
       },
 
       "hawas-kobra": {
         name: "Hawas Kobra",
         price: 45000,
         image: "static/images/hawas-kobra.jpg",
-        description: "شخصية عطرية جريئة ومميزة."
+        description: "شخصية عطرية جريئة ومميزة.",
+        notes: null
       }
     };
 
     const params = new URLSearchParams(window.location.search);
     const id = (params.get("id") || "afnan").trim().toLowerCase();
-
     const perfume = perfumes[id];
 
     const imageElement = document.getElementById("perfume-image");
@@ -241,6 +502,75 @@
     const priceElement = document.getElementById("perfume-price");
     const addButton = document.getElementById("add-button");
     const notice = document.getElementById("notice");
+    const pyramidContent = document.getElementById("pyramid-content");
+
+    function renderPyramid(notes) {
+      pyramidContent.replaceChildren();
+
+      if (!notes) {
+        const message = document.createElement("div");
+        message.className = "pyramid-unavailable";
+
+        const symbol = document.createElement("span");
+        symbol.textContent = "✧";
+
+        const text = document.createElement("div");
+        text.textContent =
+          "الهرم العطري لهذا العطر قيد التحقق. سنضيف النوتات بعد التأكد من مصدر موثوق.";
+
+        message.append(symbol, text);
+        pyramidContent.appendChild(message);
+        return;
+      }
+
+      const levels = [
+        { key: "top", number: "01", title: "الإفتتاحية" },
+        { key: "middle", number: "02", title: "قلب العطر" },
+        { key: "base", number: "03", title: "المكونات الأساسية" }
+      ];
+
+      levels.forEach((level, index) => {
+        const section = document.createElement("div");
+        section.className = "pyramid-level " + level.key;
+
+        const number = document.createElement("span");
+        number.className = "level-number";
+        number.textContent = level.number;
+
+        const title = document.createElement("span");
+        title.className = "level-title";
+        title.textContent = level.title;
+
+        const list = document.createElement("div");
+        list.className = "note-list";
+
+        notes[level.key].forEach(note => {
+          const chip = document.createElement("span");
+          chip.className = "note-chip";
+
+          const symbol = document.createElement("span");
+          symbol.className = "note-symbol";
+          symbol.setAttribute("aria-hidden", "true");
+          symbol.textContent = "✧";
+
+          const label = document.createElement("span");
+          label.textContent = note;
+
+          chip.append(symbol, label);
+          list.appendChild(chip);
+        });
+
+        section.append(number, title, list);
+        pyramidContent.appendChild(section);
+
+        if (index < levels.length - 1) {
+          const connector = document.createElement("div");
+          connector.className = "pyramid-connector";
+          connector.setAttribute("aria-hidden", "true");
+          pyramidContent.appendChild(connector);
+        }
+      });
+    }
 
     if (!perfume) {
       document.title = "العطر غير موجود | SOVA";
@@ -251,6 +581,7 @@
       imageElement.style.display = "none";
       addButton.disabled = true;
       notice.textContent = "تأكد من رابط العطر في الصفحة الرئيسية.";
+      document.getElementById("sova-pyramid").hidden = true;
     } else {
       document.title = perfume.name + " | SOVA";
       nameElement.textContent = perfume.name;
@@ -266,6 +597,8 @@
           "تعذر تحميل صورة هذا العطر. تأكد من اسم الصورة داخل مجلد static/images.";
       };
 
+      renderPyramid(perfume.notes);
+
       addButton.addEventListener("click", function () {
         if (typeof sovaAddToCart === "function") {
           sovaAddToCart(id);
@@ -279,4 +612,3 @@
   </script>
 </body>
 </html>
-```
