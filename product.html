@@ -1,41 +1,61 @@
-
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#061629">
+<link rel="icon" type="image/svg+xml" href="/static/images/sova-icon.svg">
 <title>تفاصيل العطر | SOVA</title>
 
 <style>
 :root {
-  --bg:#061629; --panel:#0a2038; --blue:#35b8ff;
-  --cyan:#8cddff; --text:#f5f8ff; --muted:#91a8bf;
+  --bg:#061629;
+  --panel:#0a2038;
+  --blue:#35b8ff;
+  --cyan:#8cddff;
+  --text:#f5f8ff;
+  --muted:#91a8bf;
   --border:rgba(140,221,255,.18);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:Arial,Tahoma,sans-serif;overflow-x:hidden;
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Tahoma,sans-serif;
+  overflow-x:hidden;
 }
 a{color:inherit;text-decoration:none}
 button{font:inherit}
 .ocean{
-  position:fixed;inset:0;overflow:hidden;pointer-events:none;
-  z-index:-1;background:
-  radial-gradient(ellipse at 20% 15%,rgba(20,133,203,.2),transparent 45%),
-  radial-gradient(ellipse at 85% 75%,rgba(12,77,132,.24),transparent 48%),
-  linear-gradient(155deg,#061629,#081e34 55%,#041222);
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:-1;
+  background:
+    radial-gradient(ellipse at 20% 15%,rgba(20,133,203,.2),transparent 45%),
+    radial-gradient(ellipse at 85% 75%,rgba(12,77,132,.24),transparent 48%),
+    linear-gradient(155deg,#061629,#081e34 55%,#041222);
 }
 .light-beam{
-  position:absolute;width:70%;height:120%;top:-30%;left:5%;
+  position:absolute;
+  width:70%;
+  height:120%;
+  top:-30%;
+  left:5%;
   background:linear-gradient(110deg,transparent,rgba(75,193,255,.055),transparent);
-  transform:rotate(20deg);animation:beam 12s ease-in-out infinite alternate;
+  transform:rotate(20deg);
+  animation:beam 12s ease-in-out infinite alternate;
 }
 .bubble{
-  position:absolute;bottom:-50px;border:1px solid rgba(140,221,255,.25);
-  border-radius:50%;background:rgba(53,184,255,.035);
+  position:absolute;
+  bottom:-50px;
+  border:1px solid rgba(140,221,255,.25);
+  border-radius:50%;
+  background:rgba(53,184,255,.035);
   animation:rise linear infinite;
 }
 .bubble:nth-child(2){left:8%;width:12px;height:12px;animation-duration:14s}
@@ -43,46 +63,117 @@ button{font:inherit}
 .bubble:nth-child(4){left:48%;width:16px;height:16px;animation-duration:17s;animation-delay:1s}
 .bubble:nth-child(5){left:72%;width:9px;height:9px;animation-duration:21s;animation-delay:5s}
 .bubble:nth-child(6){left:91%;width:13px;height:13px;animation-duration:16s;animation-delay:2s}
-@keyframes rise{to{transform:translateY(-115vh) translateX(35px);opacity:0}}
-@keyframes beam{from{transform:translateX(-10%) rotate(20deg)}to{transform:translateX(30%) rotate(20deg)}}
-@keyframes appear{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-@keyframes glow{0%,100%{box-shadow:0 0 18px rgba(53,184,255,.08)}50%{box-shadow:0 0 35px rgba(53,184,255,.2)}}
-
+@keyframes rise{
+  to{transform:translateY(-115vh) translateX(35px);opacity:0}
+}
+@keyframes beam{
+  from{transform:translateX(-10%) rotate(20deg)}
+  to{transform:translateX(30%) rotate(20deg)}
+}
+@keyframes appear{
+  from{opacity:0;transform:translateY(22px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes glow{
+  0%,100%{box-shadow:0 0 18px rgba(53,184,255,.08)}
+  50%{box-shadow:0 0 35px rgba(53,184,255,.2)}
+}
 header{
-  position:sticky;top:0;z-index:20;background:rgba(4,18,33,.86);
-  backdrop-filter:blur(15px);border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(4,18,33,.9);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--border);
 }
 .nav{
-  width:min(1160px,92%);margin:auto;min-height:72px;
-  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  width:min(1160px,92%);
+  margin:auto;
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
 }
-.logo{font-size:29px;font-weight:900;letter-spacing:5px;color:var(--cyan)}
-.links{display:flex;align-items:center;gap:22px;font-size:13px;color:#dceafa}
+.logo{
+  font-size:29px;
+  font-weight:900;
+  letter-spacing:5px;
+  color:var(--cyan);
+}
+.links{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  font-size:13px;
+  color:#dceafa;
+}
 .links a:hover{color:var(--cyan)}
-.page{width:min(1120px,92%);margin:auto;padding:28px 0 60px}
-.breadcrumb{font-size:12px;color:var(--muted);margin-bottom:22px}
+#cart-count{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:19px;
+  height:19px;
+  padding:0 5px;
+  border-radius:50px;
+  background:rgba(53,184,255,.15);
+  color:var(--cyan);
+}
+.page{
+  width:min(1120px,92%);
+  margin:auto;
+  padding:28px 0 60px;
+}
+.breadcrumb{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:22px;
+}
 .breadcrumb span{color:var(--cyan)}
-.layout{display:grid;grid-template-columns:.95fr 1.05fr;gap:24px;align-items:stretch}
+.layout{
+  display:grid;
+  grid-template-columns:.95fr 1.05fr;
+  gap:24px;
+  align-items:stretch;
+}
 .panel{
-  min-width:0;border:1px solid var(--border);border-radius:23px;
+  min-width:0;
+  border:1px solid var(--border);
+  border-radius:23px;
   background:linear-gradient(145deg,rgba(14,43,70,.88),rgba(5,22,40,.96));
-  box-shadow:0 20px 55px rgba(0,0,0,.2);overflow:hidden;
+  box-shadow:0 20px 55px rgba(0,0,0,.2);
+  overflow:hidden;
   animation:appear .7s both;
 }
 .visual{padding:22px;text-align:center}
 .eyebrow{font-size:10px;letter-spacing:3px;color:var(--cyan)}
 .stage{
-  min-height:360px;margin-top:18px;border-radius:17px;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-  background:radial-gradient(ellipse,rgba(53,184,255,.15),transparent 68%),
-  rgba(1,13,26,.3);animation:glow 6s infinite;
+  min-height:360px;
+  margin-top:18px;
+  border-radius:17px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(ellipse,rgba(53,184,255,.15),transparent 68%),
+    rgba(1,13,26,.3);
+  animation:glow 6s infinite;
 }
 .stage img{
-  display:block;width:100%;max-width:360px;height:350px;object-fit:contain;
+  display:block;
+  width:100%;
+  max-width:360px;
+  height:350px;
+  object-fit:contain;
   filter:drop-shadow(0 18px 22px rgba(0,0,0,.32));
   transition:transform .6s,filter .6s;
 }
-.stage img:hover{transform:scale(1.055);filter:drop-shadow(0 15px 30px rgba(53,184,255,.2))}
+.stage img:hover{
+  transform:scale(1.055);
+  filter:drop-shadow(0 15px 30px rgba(53,184,255,.2));
+}
 .missing{padding:24px;color:var(--muted);font-size:13px;line-height:2}
 .caption{font-size:10px;letter-spacing:3px;color:var(--muted);margin-top:18px}
 .info{padding:29px;animation-delay:.12s}
@@ -90,20 +181,37 @@ header{
 h1{font-size:clamp(27px,4vw,39px);line-height:1.4;margin:0 0 13px}
 .description{font-size:14px;line-height:2;color:#b7cadd;margin:0 0 20px}
 .price-row{
-  padding:17px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  padding:17px 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
 }
 .muted{font-size:12px;color:var(--muted)}
 .price{font-size:28px;font-weight:900;color:var(--cyan);margin-top:4px}
 .price small{font-size:12px;font-weight:400}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
 .btn{
-  min-height:49px;border-radius:12px;border:1px solid var(--border);
-  padding:12px;display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:transform .2s,filter .2s,background .2s;
+  min-height:49px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  padding:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:transform .2s,filter .2s,background .2s;
 }
 .btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
-.primary{background:linear-gradient(110deg,var(--blue),var(--cyan));color:#041525;font-weight:800;border:0}
+.primary{
+  background:linear-gradient(110deg,var(--blue),var(--cyan));
+  color:#041525;
+  font-weight:800;
+  border:0;
+}
 .secondary{background:rgba(255,255,255,.035);color:var(--text)}
 .status{font-size:12px;line-height:1.8;color:var(--cyan);margin-top:13px;min-height:20px}
 .trust{font-size:12px;color:var(--muted);line-height:1.9;margin-top:8px}
@@ -113,10 +221,23 @@ h1{font-size:clamp(27px,4vw,39px);line-height:1.4;margin:0 0 13px}
 .heading p{font-size:12px;line-height:1.9;color:var(--muted);margin:0}
 .pyramid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
 .level{
-  --tone:#78e6ff;padding:18px 15px;border-radius:16px;
-  background:rgba(2,16,29,.48);border:1px solid var(--border);min-width:0;
+  --tone:#78e6ff;
+  padding:18px 15px;
+  border-radius:16px;
+  background:rgba(2,16,29,.48);
+  border:1px solid var(--border);
+  min-width:0;
 }
-.level::before{content:"";display:block;width:37px;height:3px;background:var(--tone);box-shadow:0 0 14px var(--tone);border-radius:5px;margin-bottom:15px}
+.level::before{
+  content:"";
+  display:block;
+  width:37px;
+  height:3px;
+  background:var(--tone);
+  box-shadow:0 0 14px var(--tone);
+  border-radius:5px;
+  margin-bottom:15px;
+}
 .level.top{--tone:#78e6ff}
 .level.heart{--tone:#b3a0ff}
 .level.base{--tone:#e8b777}
@@ -125,13 +246,33 @@ h1{font-size:clamp(27px,4vw,39px);line-height:1.4;margin:0 0 13px}
 .level-desc{font-size:12px;color:var(--muted);line-height:1.8;min-height:42px;margin:0 0 14px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{
-  --note:#78e6ff;display:inline-flex;align-items:center;gap:7px;
-  padding:8px 10px;border-radius:9px;font-size:12px;line-height:1.5;
-  background:rgba(53,184,255,.06);border:1px solid var(--border);
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:8px 10px;
+  border-radius:9px;
+  font-size:12px;
+  line-height:1.5;
+  background:rgba(53,184,255,.06);
+  border:1px solid var(--border);
 }
-.dot{width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:var(--note);box-shadow:0 0 9px var(--note)}
+.dot{
+  width:8px;
+  height:8px;
+  flex:0 0 8px;
+  border-radius:50%;
+  background:var(--note);
+  box-shadow:0 0 9px var(--note);
+}
 .footnote{text-align:center;color:var(--muted);font-size:11px;line-height:1.9;margin:18px 0 0}
-footer{border-top:1px solid var(--border);padding:25px 12px;text-align:center;color:var(--muted);font-size:12px;line-height:2}
+footer{
+  border-top:1px solid var(--border);
+  padding:25px 12px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  line-height:2;
+}
 footer strong{color:var(--cyan);letter-spacing:3px}
 @media(max-width:760px){
   .nav{min-height:64px}
@@ -160,8 +301,11 @@ footer strong{color:var(--cyan);letter-spacing:3px}
 <body>
 <div class="ocean" aria-hidden="true">
   <div class="light-beam"></div>
-  <div class="bubble"></div><div class="bubble"></div>
-  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
 </div>
 
 <header>
@@ -170,14 +314,16 @@ footer strong{color:var(--cyan);letter-spacing:3px}
     <div class="links">
       <a href="index.html">الرئيسية</a>
       <a href="index.html#about">من نحن</a>
-      <a href="index.html#perfumes">عطورنا</a>
-      <a href="cart.html">السلة 🛒 <span id="cart-count"></span></a>
+      <a href="index.html#collection">عطورنا</a>
+      <a href="cart.html">السلة 🛒 <span id="cart-count">0</span></a>
     </div>
   </nav>
 </header>
 
 <main class="page">
-  <div class="breadcrumb">الرئيسية / عطورنا / <span id="breadcrumb">تفاصيل العطر</span></div>
+  <div class="breadcrumb">
+    <a href="index.html">الرئيسية</a> / عطورنا / <span id="breadcrumb">تفاصيل العطر</span>
+  </div>
 
   <div class="layout">
     <section class="panel visual">
@@ -203,8 +349,9 @@ footer strong{color:var(--cyan);letter-spacing:3px}
 
       <div class="actions">
         <button class="btn primary" id="add-to-cart">أضف إلى السلة 🛒</button>
-        <a class="btn secondary" href="index.html#perfumes">العودة للعطور</a>
+        <a class="btn secondary" href="index.html#collection">العودة للعطور</a>
       </div>
+
       <div class="status" id="cart-status" role="status" aria-live="polite"></div>
       <div class="trust">اختَر عطرك المفضل، واكتشف طبقاته، وخلي حضورك يحچي عنك.</div>
     </section>
@@ -224,12 +371,14 @@ footer strong{color:var(--cyan);letter-spacing:3px}
         <p class="level-desc">أول الروائح التي تلاحظها عند رش العطر.</p>
         <div class="chips" id="top-notes"></div>
       </article>
+
       <article class="level heart">
         <div class="level-num">02 · HEART</div>
         <h3>نوتات القلب</h3>
         <p class="level-desc">الشخصية الأساسية التي تتطور بعد البداية.</p>
         <div class="chips" id="middle-notes"></div>
       </article>
+
       <article class="level base">
         <div class="level-num">03 · DRY DOWN</div>
         <h3>نوتات القاعدة</h3>
@@ -237,210 +386,249 @@ footer strong{color:var(--cyan);letter-spacing:3px}
         <div class="chips" id="base-notes"></div>
       </article>
     </div>
-    <p class="footnote">ملاحظة: النوتات العامة غير المؤكدة ستُعرض بوضوح، ويُفضّل التحقق من التركيبة الرسمية لكل عطر.</p>
+
+    <p class="footnote">تفاصيل النوتات معروضة حسب بيانات العطور المعتمدة في SOVA.</p>
   </section>
 </main>
 
 <footer>
   <strong>SOVA®</strong>
   <div>مو مجرد عطر، هذا حضور.</div>
-  <div>© SOVA Perfumes</div>
+  <div>© 2026 SOVA — كل الحقوق محفوظة</div>
 </footer>
 
 <script src="static/js/app.js"></script>
 <script>
 const perfumes = {
   "afnan": {
-    name:"Afnan 9 PM",
-    price:65000,
-    image:"static/images/AFNAN.jpg",
-    description:"عطر مميز لمحبي الروائح الجذابة والحضور القوي.",
-    notes:{
-      top:["التفاح","البرغموت","القرفة","اللافندر"],
-      middle:["زهر البرتقال","زنبق الوادي"],
-      base:["الفانيلا","حبوب التونكا","العنبر","الباتشولي"]
+    name: "Afnan 9 PM",
+    price: 65000,
+    image: "static/images/AFNAN.jpg",
+    description: "عطر شرقي بفانيليا للرجال، صدر عام 2020.",
+    notes: {
+      top: ["التفاح", "القرفة", "الخزامى البري", "البرغموت"],
+      middle: ["زهر البرتقال", "زنابق الوادي"],
+      base: ["الفانيليا", "حبوب التونكا", "العنبر", "الباتشولي"]
     }
   },
+
   "night-out": {
-    name:"Afnan 9 PM Night Out",
-    price:65000,
-    image:"static/images/night-out.jpg",
-    description:"عطر من مجموعة 9 PM لمحبي الروائح المسائية والحضور اللافت.",
-    notes:{
-      top:["نوتات منعشة"],
-      middle:["نوتات عطرية"],
-      base:["أخشاب دافئة","المسك"]
+    name: "Afnan 9 PM Night Out",
+    price: 65000,
+    image: "static/images/night-out.jpg",
+    description: "عطر شرقي حار للجنسين، صدر عام 2026، من توقيع Quentin Roussel وImran Fazlani.",
+    notes: {
+      top: ["فاكهة التنين", "الكونياك", "الخزامى", "التفاح", "البرغموت"],
+      middle: ["الطوفي", "جلد الغزال", "الهيل", "خشب الأرز", "ماهونيال"],
+      base: ["حبوب التونكا", "أكيغالاوود", "أمبروفيكس", "الباتشولي"]
     }
   },
-  "freeze": {
-    name:"RiiFFS Freeze",
-    price:50000,
-    image:"static/images/FREEZE RIIFFS.jpg",
-    description:"RiiFFS Freeze لعشاق العطور ذات الطابع المنعش والحضور المميز.",
-    notes:{
-      top:["نوتات منعشة"],
-      middle:["نوتات عطرية"],
-      base:["الأخشاب","المسك"]
-    }
-  },
-  "flames": {
-    name:"RiiFFS In Flames",
-    price:50000,
-    image:"static/images/FREEZE IN FLAMES RIIFFS.jpg",
-    description:"RiiFFS In Flames لعشاق الروائح المميزة والحضور اللافت.",
-    notes:{
-      top:["نوتات منعشة"],
-      middle:["نوتات عطرية"],
-      base:["الأخشاب","المسك"]
-    }
-  },
+
   "asad": {
-    name:"Lattafa Asad",
-    price:45000,
-    image:"static/images/ASAD.jpg",
-    description:"عطر رجالي بطابع دافئ وجذاب.",
-    notes:{
-      top:["الفلفل الأسود","الأناناس"],
-      middle:["القهوة","الباتشولي","السوسن"],
-      base:["الفانيلا","العنبر","الأخشاب"]
+    name: "Lattafa Asad",
+    price: 45000,
+    image: "static/images/ASAD.jpg",
+    description: "عطر شرقي للرجال، صدر عام 2021.",
+    notes: {
+      top: ["الفلفل الأسود", "التبغ", "الأناناس"],
+      middle: ["الباتشولي", "القهوة", "السوسن"],
+      base: ["الفانيليا", "العنبر", "الأخشاب الجافة", "البنزوين", "اللابدانوم"]
     }
   },
+
+  "freeze": {
+    name: "RiiFFS Freeze",
+    price: 50000,
+    image: "static/images/FREEZE RIIFFS.jpg",
+    description: "عطر زهري فاكهي للجنسين، صدر عام 2025، من توقيع Shinichiro Oba.",
+    notes: {
+      top: ["النعناع المدبب", "بشر الليمون", "برغموت كالابريا", "الجريب فروت", "الثلج"],
+      middle: ["الثلج", "الشاي", "الزنجبيل", "المريمية"],
+      base: ["Ambermax", "الفاوانيا", "خشب الأرز"]
+    }
+  },
+
+  "flames": {
+    name: "RiiFFS Freeze In Flames",
+    price: 50000,
+    image: "static/images/FREEZE IN FLAMES RIIFFS.jpg",
+    description: "عطر أروماتك فاكهي للجنسين، صدر عام 2025، من توقيع Shinichiro Oba.",
+    notes: {
+      top: ["توت العليق", "النعناع المدبب", "التفاح الأحمر", "برغموت كالابريا", "الباشون فروت"],
+      middle: ["النعناع المدبب", "الخزامى", "الشاي", "المريمية"],
+      base: ["المسك", "خشب الأرز"]
+    }
+  },
+
   "supremacy-ce": {
-    name:"Afnan Supremacy Collector's Edition",
-    price:70000,
-    image:"static/images/supremacy-ce.jpg",
-    description:"عطر من مجموعة Supremacy لمحبي الروائح الغنية والطابع الفاخر.",
-    notes:{
-      top:["الأناناس","البرغموت"],
-      middle:["الأخشاب","النوتات العطرية"],
-      base:["المسك","العنبر"]
+    name: "Afnan Supremacy Collector's Edition Pour Homme",
+    price: 70000,
+    image: "static/images/supremacy-ce.jpg",
+    description: "عطر شيبر فاكهي للرجال، صدر عام 2024، من توقيع عمران فضلاني.",
+    notes: {
+      top: ["الأناناس", "البرغموت", "الزهور البيضاء", "التفاح"],
+      middle: ["زهر البرتقال", "البتولا", "العنبر"],
+      base: ["طحلب البلوط", "المسك", "العنبر"]
     }
   },
+
   "hawas-ice": {
-    name:"Rasasi Hawas Ice",
-    price:45000,
-    image:"static/images/hawas-ice.jpg",
-    description:"عطر منعش بطابع حيوي لمحبي الروائح العصرية.",
-    notes:{
-      top:["نوتات منعشة"],
-      middle:["نوتات عطرية"],
-      base:["الأخشاب","المسك"]
+    name: "Rasasi Hawas Ice",
+    price: 45000,
+    image: "static/images/hawas-ice.jpg",
+    description: "عطر أروماتك للرجال، صدر عام 2023.",
+    notes: {
+      top: ["التفاح", "الليمون الإيطالي", "البرغموت الصقلي", "اليانسون النجمي"],
+      middle: ["البرقوق", "زهر البرتقال", "الهيل"],
+      base: ["المسك", "العنبر", "الأخشاب الطافية", "الطحالب"]
     }
   },
+
   "hawas-black": {
-    name:"Rasasi Hawas Black",
-    price:45000,
-    image:"static/images/hawas-black.jpg",
-    description:"عطر من مجموعة Hawas لمحبي الروائح الجريئة.",
-    notes:{
-      top:["نوتات منعشة"],
-      middle:["نوتات عطرية"],
-      base:["الأخشاب","المسك"]
+    name: "Rasasi Hawas Black",
+    price: 45000,
+    image: "static/images/hawas-black.jpg",
+    description: "عطر أروماتك فاكهي للرجال، صدر عام 2024.",
+    notes: {
+      top: ["البرغموت", "الأناناس", "الجريب فروت"],
+      middle: ["الباتشولي", "خشب الأرز", "الياسمين"],
+      base: ["طحلب البلوط", "الأخشاب", "العنبر"]
     }
   },
+
   "hawas-kobra": {
-    name:"Rasasi Hawas Kobra",
-    price:45000,
-    image:"static/images/hawas-kobra.jpg",
-    description:"عطر من مجموعة Hawas لمحبي العطور العصرية.",
-    notes:{
-      top:["نوتات منعشة"],
-      middle:["نوتات عطرية"],
-      base:["الأخشاب","المسك"]
+    name: "Rasasi Hawas Kobra",
+    price: 45000,
+    image: "static/images/hawas-kobra.jpg",
+    description: "عطر شرقي خشبي للرجال، صدر عام 2025.",
+    notes: {
+      top: ["الزنجبيل", "البرغموت", "اليوسفي"],
+      middle: ["الشاي الأخضر", "النيرولي", "القرفة"],
+      base: ["المسك", "الأخشاب", "العنبر"]
     }
   }
 };
 
-const noteColors=[
-  "#78e6ff","#b3a0ff","#e8b777","#8ee6bb",
-  "#ff9fba","#ffd166","#8cbcff"
+const noteColors = [
+  "#78e6ff", "#b3a0ff", "#e8b777", "#8ee6bb",
+  "#ff9fba", "#ffd166", "#8cbcff"
 ];
 
-function renderNotes(id, notes) {
-  const container=document.getElementById(id);
+function renderNotes(containerId, notes) {
+  const container = document.getElementById(containerId);
   container.replaceChildren();
 
-  (notes || []).forEach((note,index)=>{
-    const chip=document.createElement("span");
-    chip.className="chip";
+  (notes || []).forEach((note, index) => {
+    const chip = document.createElement("span");
+    chip.className = "chip";
 
-    const dot=document.createElement("span");
-    dot.className="dot";
-    dot.style.setProperty("--note",noteColors[index % noteColors.length]);
+    const dot = document.createElement("span");
+    dot.className = "dot";
+    dot.style.setProperty("--note", noteColors[index % noteColors.length]);
 
-    const label=document.createElement("span");
-    label.textContent=note;
+    const label = document.createElement("span");
+    label.textContent = note;
 
-    chip.append(dot,label);
+    chip.append(dot, label);
     container.appendChild(chip);
   });
 
-  if(!container.children.length) {
-    const text=document.createElement("span");
-    text.className="muted";
-    text.textContent="لا تتوفر معلومات لهذه الطبقة حالياً.";
-    container.appendChild(text);
+  if (!container.children.length) {
+    const message = document.createElement("span");
+    message.className = "muted";
+    message.textContent = "لا تتوفر معلومات لهذه الطبقة حالياً.";
+    container.appendChild(message);
+  }
+}
+
+function updateCartCount() {
+  const countElement = document.getElementById("cart-count");
+  if (!countElement) return;
+
+  try {
+    const cart = JSON.parse(localStorage.getItem("sova_cart") || "[]");
+    const count = Array.isArray(cart)
+      ? cart.reduce((sum, item) => sum + (Number(item.quantity) || 1), 0)
+      : 0;
+    countElement.textContent = count;
+  } catch (error) {
+    countElement.textContent = "0";
   }
 }
 
 function renderProduct() {
-  const id=new URLSearchParams(location.search).get("id");
-  const product=perfumes[id];
+  const id = new URLSearchParams(location.search).get("id");
+  const product = perfumes[id];
 
-  if(!product) {
-    document.getElementById("product-name").textContent="العطر غير موجود";
-    document.getElementById("product-description").textContent="ارجع إلى صفحة العطور واختر العطر المطلوب.";
-    document.getElementById("image-stage").innerHTML='<div class="missing">تعذر تحديد العطر. افتح صفحة العطور واختر المنتج من جديد.</div>';
-    document.getElementById("add-to-cart").disabled=true;
+  if (!product) {
+    document.getElementById("product-name").textContent = "العطر غير موجود";
+    document.getElementById("product-description").textContent =
+      "ارجع إلى صفحة العطور واختر العطر المطلوب.";
+
+    document.getElementById("image-stage").innerHTML =
+      '<div class="missing">تعذر تحديد العطر. افتح صفحة العطور واختر المنتج من جديد.</div>';
+
+    document.getElementById("add-to-cart").disabled = true;
     return;
   }
 
-  document.title=product.name+" | SOVA";
-  document.getElementById("breadcrumb").textContent=product.name;
-  document.getElementById("product-name").textContent=product.name;
-  document.getElementById("product-description").textContent=product.description;
-  document.getElementById("product-price").textContent=product.price.toLocaleString("en-US");
+  document.title = product.name + " | SOVA";
+  document.getElementById("breadcrumb").textContent = product.name;
+  document.getElementById("product-name").textContent = product.name;
+  document.getElementById("product-description").textContent = product.description;
+  document.getElementById("product-price").textContent =
+    product.price.toLocaleString("en-US");
 
-  const img=document.getElementById("product-image");
-  img.alt=product.name;
+  const img = document.getElementById("product-image");
+  img.alt = product.name;
 
-  // معالجة خطأ الصورة قبل تعيين المسار
-  img.onerror=()=>{
-    img.style.display="none";
+  img.onerror = () => {
+    img.style.display = "none";
 
-    if(!document.querySelector("#image-stage .missing")) {
-      const msg=document.createElement("div");
-      msg.className="missing";
-      msg.textContent="تعذر تحميل الصورة. تأكد من اسم الملف ومساره داخل static/images في GitHub.";
-      document.getElementById("image-stage").appendChild(msg);
+    if (!document.querySelector("#image-stage .missing")) {
+      const message = document.createElement("div");
+      message.className = "missing";
+      message.textContent =
+        "تعذر تحميل الصورة. تأكد من اسم الملف ومساره داخل static/images في GitHub.";
+      document.getElementById("image-stage").appendChild(message);
     }
   };
 
-  img.onload=()=>{
-    img.style.display="block";
-    const msg=document.querySelector("#image-stage .missing");
-    if(msg) msg.remove();
+  img.onload = () => {
+    img.style.display = "block";
+    const message = document.querySelector("#image-stage .missing");
+    if (message) message.remove();
   };
 
-  img.src=product.image;
+  img.src = product.image;
 
-  renderNotes("top-notes",product.notes.top);
-  renderNotes("middle-notes",product.notes.middle);
-  renderNotes("base-notes",product.notes.base);
+  renderNotes("top-notes", product.notes.top);
+  renderNotes("middle-notes", product.notes.middle);
+  renderNotes("base-notes", product.notes.base);
 
-  document.getElementById("add-to-cart").onclick=()=>{
-    const status=document.getElementById("cart-status");
+  const addButton = document.getElementById("add-to-cart");
+  const status = document.getElementById("cart-status");
 
-    if(typeof window.sovaAddToCart==="function") {
+  addButton.onclick = () => {
+    if (typeof window.sovaAddToCart === "function") {
       window.sovaAddToCart(id);
-      status.textContent="تم إرسال طلب إضافة العطر إلى السلة. تحقق من السلة للتأكد.";
+      status.textContent = "تمت محاولة إضافة العطر إلى السلة. افتح السلة للتأكد.";
+      updateCartCount();
+    } else if (typeof window.addToCart === "function") {
+      window.addToCart(id);
+      status.textContent = "تمت محاولة إضافة العطر إلى السلة. افتح السلة للتأكد.";
+      updateCartCount();
     } else {
-      status.textContent="نظام السلة غير متاح بهذه الصفحة. افتح السلة وتأكد من ملف app.js.";
+      status.textContent =
+        "تعذر الوصول إلى نظام السلة. تحقق من ملف static/js/app.js.";
     }
   };
+
+  updateCartCount();
 }
 
 renderProduct();
 </script>
 </body>
 </html>
+```
