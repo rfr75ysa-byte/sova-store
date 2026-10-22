@@ -9,12 +9,8 @@
 
 <style>
 :root {
-  --bg:#061629;
-  --panel:#0a2038;
-  --blue:#35b8ff;
-  --cyan:#8cddff;
-  --text:#f5f8ff;
-  --muted:#91a8bf;
+  --bg:#061629; --panel:#0a2038; --blue:#35b8ff;
+  --cyan:#8cddff; --text:#f5f8ff; --muted:#91a8bf;
   --border:rgba(140,221,255,.18);
 }
 *{box-sizing:border-box}
@@ -255,53 +251,110 @@ footer strong{color:var(--cyan);letter-spacing:3px}
 <script>
 const perfumes = {
   "afnan": {
-    name:"Afnan 9 PM", price:65000, image: "static/images/AFNAN.jpg",
+    name:"Afnan 9 PM",
+    price:65000,
+    image:"static/images/AFNAN.jpg",
     description:"عطر مميز لمحبي الروائح الجذابة والحضور القوي.",
-    notes:{top:["التفاح","البرغموت","القرفة","اللافندر"],middle:["زهر البرتقال","زنبق الوادي"],base:["الفانيلا","حبوب التونكا","العنبر","الباتشولي"]}
+    notes:{
+      top:["التفاح","البرغموت","القرفة","اللافندر"],
+      middle:["زهر البرتقال","زنبق الوادي"],
+      base:["الفانيلا","حبوب التونكا","العنبر","الباتشولي"]
+    }
   },
   "night-out": {
-    name:"Afnan 9 PM Night Out", price:65000, image: "static/images/night-out.jpg",
+    name:"Afnan 9 PM Night Out",
+    price:65000,
+    image:"static/images/night-out.jpg",
     description:"عطر من مجموعة 9 PM لمحبي الروائح المسائية والحضور اللافت.",
-    notes:{top:["نوتات منعشة"],middle:["نوتات عطرية"],base:["أخشاب دافئة","المسك"]}
+    notes:{
+      top:["نوتات منعشة"],
+      middle:["نوتات عطرية"],
+      base:["أخشاب دافئة","المسك"]
+    }
   },
   "freeze": {
-    name:"RiiFFS Freeze", price:50000, image:"static/images/FREEZE RIIFFS.jpg",
+    name:"RiiFFS Freeze",
+    price:50000,
+    image:"static/images/FREEZE RIIFFS.jpg",
     description:"RiiFFS Freeze لعشاق العطور ذات الطابع المنعش والحضور المميز.",
-    notes:{top:["نوتات منعشة"],middle:["نوتات عطرية"],base:["الأخشاب","المسك"]}
+    notes:{
+      top:["نوتات منعشة"],
+      middle:["نوتات عطرية"],
+      base:["الأخشاب","المسك"]
+    }
   },
   "flames": {
-    name:"RiiFFS In Flames", price:50000, image:"static/images/FREEZE IN FLAMES RIIFFS.jpg",
+    name:"RiiFFS In Flames",
+    price:50000,
+    image:"static/images/FREEZE IN FLAMES RIIFFS.jpg",
     description:"RiiFFS In Flames لعشاق الروائح المميزة والحضور اللافت.",
-    notes:{top:["نوتات منعشة"],middle:["نوتات عطرية"],base:["الأخشاب","المسك"]}
+    notes:{
+      top:["نوتات منعشة"],
+      middle:["نوتات عطرية"],
+      base:["الأخشاب","المسك"]
+    }
   },
   "asad": {
-    name:"Lattafa Asad", price:45000, image:image: "static/images/ASAD.jpg",
+    name:"Lattafa Asad",
+    price:45000,
+    image:"static/images/ASAD.jpg",
     description:"عطر رجالي بطابع دافئ وجذاب.",
-    notes:{top:["الفلفل الأسود","الأناناس"],middle:["القهوة","الباتشولي","السوسن"],base:["الفانيلا","العنبر","الأخشاب"]}
+    notes:{
+      top:["الفلفل الأسود","الأناناس"],
+      middle:["القهوة","الباتشولي","السوسن"],
+      base:["الفانيلا","العنبر","الأخشاب"]
+    }
   },
   "supremacy-ce": {
-    name:"Afnan Supremacy Collector's Edition", price:70000, image:"static/images/supremacy-ce.jpg",
+    name:"Afnan Supremacy Collector's Edition",
+    price:70000,
+    image:"static/images/supremacy-ce.jpg",
     description:"عطر من مجموعة Supremacy لمحبي الروائح الغنية والطابع الفاخر.",
-    notes:{top:["الأناناس","البرغموت"],middle:["الأخشاب","النوتات العطرية"],base:["المسك","العنبر"]}
+    notes:{
+      top:["الأناناس","البرغموت"],
+      middle:["الأخشاب","النوتات العطرية"],
+      base:["المسك","العنبر"]
+    }
   },
   "hawas-ice": {
-    name:"Rasasi Hawas Ice", price:45000, image:"static/images/hawas-ice.jpg",
+    name:"Rasasi Hawas Ice",
+    price:45000,
+    image:"static/images/hawas-ice.jpg",
     description:"عطر منعش بطابع حيوي لمحبي الروائح العصرية.",
-    notes:{top:["نوتات منعشة"],middle:["نوتات عطرية"],base:["الأخشاب","المسك"]}
+    notes:{
+      top:["نوتات منعشة"],
+      middle:["نوتات عطرية"],
+      base:["الأخشاب","المسك"]
+    }
   },
   "hawas-black": {
-    name:"Rasasi Hawas Black", price:45000, image:"static/images/hawas-black.jpg",
+    name:"Rasasi Hawas Black",
+    price:45000,
+    image:"static/images/hawas-black.jpg",
     description:"عطر من مجموعة Hawas لمحبي الروائح الجريئة.",
-    notes:{top:["نوتات منعشة"],middle:["نوتات عطرية"],base:["الأخشاب","المسك"]}
+    notes:{
+      top:["نوتات منعشة"],
+      middle:["نوتات عطرية"],
+      base:["الأخشاب","المسك"]
+    }
   },
   "hawas-kobra": {
-    name:"Rasasi Hawas Kobra", price:45000, image:"static/images/hawas-kobra.jpg",
+    name:"Rasasi Hawas Kobra",
+    price:45000,
+    image:"static/images/hawas-kobra.jpg",
     description:"عطر من مجموعة Hawas لمحبي العطور العصرية.",
-    notes:{top:["نوتات منعشة"],middle:["نوتات عطرية"],base:["الأخشاب","المسك"]}
+    notes:{
+      top:["نوتات منعشة"],
+      middle:["نوتات عطرية"],
+      base:["الأخشاب","المسك"]
+    }
   }
 };
 
-const noteColors=["#78e6ff","#b3a0ff","#e8b777","#8ee6bb","#ff9fba","#ffd166","#8cbcff"];
+const noteColors=[
+  "#78e6ff","#b3a0ff","#e8b777","#8ee6bb",
+  "#ff9fba","#ffd166","#8cbcff"
+];
 
 function renderNotes(id, notes) {
   const container=document.getElementById(id);
@@ -310,11 +363,14 @@ function renderNotes(id, notes) {
   (notes || []).forEach((note,index)=>{
     const chip=document.createElement("span");
     chip.className="chip";
+
     const dot=document.createElement("span");
     dot.className="dot";
     dot.style.setProperty("--note",noteColors[index % noteColors.length]);
+
     const label=document.createElement("span");
     label.textContent=note;
+
     chip.append(dot,label);
     container.appendChild(chip);
   });
@@ -346,23 +402,33 @@ function renderProduct() {
   document.getElementById("product-price").textContent=product.price.toLocaleString("en-US");
 
   const img=document.getElementById("product-image");
-  img.src=product.image;
   img.alt=product.name;
+
+  // معالجة خطأ الصورة قبل تعيين المسار
   img.onerror=()=>{
     img.style.display="none";
+
     if(!document.querySelector("#image-stage .missing")) {
       const msg=document.createElement("div");
       msg.className="missing";
-      msg.textContent="تعذر تحميل الصورة. تحقق من اسم ملف الصورة ومساره في GitHub.";
+      msg.textContent="تعذر تحميل الصورة. تأكد من اسم الملف ومساره داخل static/images في GitHub.";
       document.getElementById("image-stage").appendChild(msg);
     }
   };
+
+  img.onload=()=>{
+    img.style.display="block";
+    const msg=document.querySelector("#image-stage .missing");
+    if(msg) msg.remove();
+  };
+
+  img.src=product.image;
 
   renderNotes("top-notes",product.notes.top);
   renderNotes("middle-notes",product.notes.middle);
   renderNotes("base-notes",product.notes.base);
 
-  document.getElementById("add-to-cart").addEventListener("click",()=>{
+  document.getElementById("add-to-cart").onclick=()=>{
     const status=document.getElementById("cart-status");
 
     if(typeof window.sovaAddToCart==="function") {
@@ -371,7 +437,7 @@ function renderProduct() {
     } else {
       status.textContent="نظام السلة غير متاح بهذه الصفحة. افتح السلة وتأكد من ملف app.js.";
     }
-  });
+  };
 }
 
 renderProduct();
