@@ -5,393 +5,599 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#061629">
-  <meta name="description" content="اكتشف تفاصيل العطور ونوتاتها العطرية في SOVA.">
   <title>تفاصيل العطر | SOVA</title>
-  <link rel="stylesheet" href="static/css/style.css">
 
   <style>
-    .details {
-      max-width: 1180px;
-      margin: auto;
-      padding: 55px 24px;
-      display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      gap: 38px;
-      align-items: start;
-      min-height: 75vh;
+    :root {
+      --bg: #061629;
+      --panel: #0a2038;
+      --panel-light: #102d49;
+      --blue: #35b8ff;
+      --cyan: #8cddff;
+      --text: #f5f8ff;
+      --muted: #91a8bf;
+      --border: rgba(140, 221, 255, .15);
     }
 
-    .details-image {
-      position: sticky;
-      top: 25px;
-      min-height: 420px;
-      display: grid;
-      place-items: center;
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
       background:
-        radial-gradient(ellipse at center, #17476b 0%, #0a2038 48%, transparent 78%);
-      border: 1px solid rgba(154, 204, 238, .16);
-      border-radius: 18px;
+        radial-gradient(ellipse at 15% 10%, rgba(30, 126, 190, .16), transparent 38%),
+        radial-gradient(ellipse at 90% 65%, rgba(16, 90, 145, .15), transparent 40%),
+        var(--bg);
+      font-family: Arial, Tahoma, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(5, 19, 35, .94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      width: min(1180px, 92%);
+      min-height: 76px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      color: var(--cyan);
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: #dceafa;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: var(--cyan);
+    }
+
+    .page {
+      width: min(1120px, 92%);
+      margin: auto;
+      padding: 34px 0 65px;
+    }
+
+    .breadcrumb {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 26px;
+    }
+
+    .breadcrumb span {
+      color: var(--cyan);
+    }
+
+    .product-layout {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .glass-panel {
+      min-width: 0;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: linear-gradient(
+        145deg,
+        rgba(15, 46, 74, .88),
+        rgba(7, 26, 46, .96)
+      );
+      box-shadow: 0 18px 55px rgba(0, 0, 0, .2);
       overflow: hidden;
     }
 
-    .details-image img {
+    .product-visual {
+      padding: 22px;
+      text-align: center;
+    }
+
+    .visual-label {
+      color: var(--cyan);
+      font-size: 11px;
+      letter-spacing: 3px;
+      margin: 3px 0 20px;
+    }
+
+    .image-stage {
+      min-height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      background:
+        radial-gradient(ellipse, rgba(53, 184, 255, .16), transparent 68%),
+        rgba(1, 14, 27, .28);
+      overflow: hidden;
+    }
+
+    .image-stage img {
+      display: block;
       width: 100%;
-      height: 420px;
+      max-width: 350px;
+      height: 330px;
       object-fit: contain;
-      padding: 25px;
-      box-sizing: border-box;
-      filter: drop-shadow(0 15px 28px rgba(0, 0, 0, .3));
+      filter: drop-shadow(0 15px 24px rgba(0, 0, 0, .28));
       transition: transform .4s ease;
     }
 
-    .details-image img:hover {
-      transform: scale(1.035);
+    .image-stage img:hover {
+      transform: scale(1.045);
     }
 
-    .details-info .eyebrow {
-      color: #35b8ff;
-      letter-spacing: 2px;
-      font-size: 12px;
-    }
-
-    .details-info h1 {
-      font-size: clamp(28px, 4vw, 45px);
-      margin: 12px 0;
-    }
-
-    .details-info > p:not(.eyebrow):not(.notice) {
-      color: #a7bdd0;
-      line-height: 2;
-    }
-
-    .details-price {
-      display: block;
-      font-size: 25px;
-      color: #8cddff;
-      margin: 22px 0;
-    }
-
-    .details-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .details-actions button,
-    .details-actions a {
-      border: 0;
-      border-radius: 8px;
-      padding: 13px 20px;
-      font-weight: bold;
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform .2s, opacity .2s;
-    }
-
-    .details-actions button:hover,
-    .details-actions a:hover {
-      transform: translateY(-2px);
-      opacity: .9;
-    }
-
-    .add-button {
-      background: #35b8ff;
-      color: #04172a;
-    }
-
-    .back-button {
-      border: 1px solid #35b8ff66 !important;
-      background: transparent;
-      color: #8cddff;
-    }
-
-    .notice {
-      color: #8cddff !important;
-      font-size: 13px;
-      min-height: 24px;
-      line-height: 1.8;
-    }
-
-    /* SOVA Fragrance Pyramid */
-
-    .sova-pyramid {
-      margin-top: 34px;
-      padding: 23px 18px;
-      border: 1px solid rgba(140, 221, 255, .2);
-      border-radius: 16px;
-      background:
-        radial-gradient(ellipse at top, rgba(35, 119, 164, .14), transparent 75%),
-        rgba(6, 22, 41, .65);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, .12);
-    }
-
-    .pyramid-heading {
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
-    .pyramid-heading small {
-      display: block;
-      color: #35b8ff;
-      font-size: 10px;
-      letter-spacing: 3px;
-      margin-bottom: 7px;
-    }
-
-    .pyramid-heading h2 {
-      font-size: 25px;
-      margin: 0 0 8px;
-      color: #f5f8ff;
-    }
-
-    .pyramid-heading p {
-      color: #91a8bf;
-      font-size: 12px;
-      margin: 0;
-      line-height: 1.8;
-    }
-
-    .pyramid-levels {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 9px;
-    }
-
-    .pyramid-level {
-      position: relative;
-      width: 100%;
-      padding: 17px 13px;
-      box-sizing: border-box;
-      border: 1px solid rgba(255, 255, 255, .1);
-      text-align: center;
-      overflow: hidden;
-      transition: border-color .25s, transform .25s;
-    }
-
-    .pyramid-level:hover {
-      border-color: rgba(255, 255, 255, .4);
-      transform: translateY(-2px);
-    }
-
-    .pyramid-level.top {
-      width: 72%;
-      background: linear-gradient(135deg, #17496c, #216e94);
-      clip-path: polygon(15% 0, 85% 0, 100% 100%, 0 100%);
-      padding-left: 22px;
-      padding-right: 22px;
-    }
-
-    .pyramid-level.middle {
-      width: 86%;
-      background: linear-gradient(135deg, #125577, #18799a);
-      clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
-      padding-left: 22px;
-      padding-right: 22px;
-    }
-
-    .pyramid-level.base {
-      width: 100%;
-      background: linear-gradient(135deg, #10354f, #15516c);
-      border-bottom: 2px solid #35b8ff;
-    }
-
-    .level-number {
-      display: block;
-      color: #a8e5ff;
-      font-size: 10px;
-      letter-spacing: 2px;
-      margin-bottom: 5px;
-    }
-
-    .level-title {
-      display: block;
-      color: #fff;
-      font-weight: bold;
+    .image-missing {
+      padding: 35px 15px;
+      color: var(--muted);
+      line-height: 1.9;
       font-size: 14px;
+    }
+
+    .visual-caption {
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 2px;
+      margin-top: 20px;
+    }
+
+    .product-info {
+      padding: 28px;
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+      font-size: 11px;
+      letter-spacing: 3px;
       margin-bottom: 12px;
     }
 
-    .note-list {
+    .product-info h1 {
+      font-size: clamp(26px, 4vw, 38px);
+      margin: 0 0 13px;
+      line-height: 1.4;
+    }
+
+    .description {
+      color: #b4c8dc;
+      font-size: 14px;
+      line-height: 2;
+      margin: 0 0 20px;
+    }
+
+    .price-row {
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: space-between;
       flex-wrap: wrap;
-      gap: 7px;
+      gap: 12px;
+      padding: 17px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .price-label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .price {
+      color: var(--cyan);
+      font-size: 27px;
+      font-weight: 900;
+    }
+
+    .currency {
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform .2s, background .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: #031423;
+      font-weight: 800;
+      border-color: transparent;
+      background: linear-gradient(110deg, var(--blue), var(--cyan));
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, .035);
+      color: var(--text);
+    }
+
+    .detail-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+      margin: 17px 0 0;
+    }
+
+    .pyramid-section {
+      margin-top: 28px;
+      padding: 26px;
+    }
+
+    .section-heading {
+      margin-bottom: 22px;
+      text-align: center;
+    }
+
+    .section-heading .eyebrow {
+      margin-bottom: 9px;
+    }
+
+    .section-heading h2 {
+      font-size: 25px;
+      margin: 0 0 9px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+      margin: 0;
+    }
+
+    .pyramid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .note-level {
+      min-width: 0;
+      padding: 19px 15px;
+      border-radius: 17px;
+      background: rgba(2, 17, 31, .48);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .note-level::before {
+      content: "";
+      display: block;
+      width: 38px;
+      height: 3px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      background: var(--level-color);
+      box-shadow: 0 0 15px var(--level-color);
+    }
+
+    .top-level {
+      --level-color: #78e6ff;
+    }
+
+    .middle-level {
+      --level-color: #b3a0ff;
+    }
+
+    .base-level {
+      --level-color: #e8b777;
+    }
+
+    .level-number {
+      color: var(--level-color);
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-bottom: 7px;
+    }
+
+    .note-level h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+
+    .level-description {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+      min-height: 42px;
+      margin: 0 0 16px;
+    }
+
+    .notes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .note-chip {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 7px 10px;
-      border-radius: 6px;
-      background: rgba(3, 19, 34, .42);
-      border: 1px solid rgba(176, 226, 255, .15);
-      color: #eff9ff;
+      gap: 7px;
+      max-width: 100%;
+      padding: 8px 10px;
+      border-radius: 9px;
       font-size: 12px;
-      line-height: 1.6;
+      line-height: 1.5;
+      background: color-mix(in srgb, var(--note-color) 11%, transparent);
+      border: 1px solid color-mix(in srgb, var(--note-color) 35%, transparent);
+      color: #f1f7ff;
     }
 
-    .note-symbol {
-      color: #8cddff;
-      font-size: 15px;
-      line-height: 1;
+    .note-dot {
+      width: 8px;
+      height: 8px;
+      flex: 0 0 8px;
+      border-radius: 50%;
+      background: var(--note-color);
+      box-shadow: 0 0 9px var(--note-color);
     }
 
-    .pyramid-connector {
-      width: 1px;
-      height: 9px;
-      background: linear-gradient(#35b8ff, rgba(53, 184, 255, .15));
+    .note-level.empty .notes {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
     }
 
     .pyramid-footnote {
+      margin-top: 17px;
       text-align: center;
+      color: var(--muted);
       font-size: 11px;
-      color: #91a8bf;
-      line-height: 1.8;
-      margin: 17px 0 0;
+      line-height: 1.9;
     }
 
-    .pyramid-unavailable {
-      padding: 22px 15px;
-      border: 1px solid rgba(140, 221, 255, .13);
-      border-radius: 10px;
-      color: #a7bdd0;
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 25px 15px;
       text-align: center;
-      font-size: 13px;
+      color: var(--muted);
+      font-size: 12px;
       line-height: 2;
     }
 
-    .pyramid-unavailable span {
-      display: block;
-      color: #8cddff;
-      font-size: 23px;
-      margin-bottom: 8px;
+    .site-footer strong {
+      color: var(--cyan);
+      letter-spacing: 2px;
+    }
+
+    .error-message {
+      display: none;
+      margin-top: 20px;
+      border: 1px solid rgba(255, 140, 140, .3);
+      border-radius: 12px;
+      padding: 15px;
+      color: #ffbdbd;
+      background: rgba(100, 20, 20, .14);
+      line-height: 1.8;
+      font-size: 13px;
     }
 
     @media (max-width: 760px) {
-      .details {
+      .nav {
+        min-height: 66px;
+      }
+
+      .logo {
+        font-size: 25px;
+      }
+
+      .nav-links {
+        gap: 12px;
+        font-size: 12px;
+      }
+
+      .page {
+        padding-top: 23px;
+      }
+
+      .product-layout {
         grid-template-columns: 1fr;
-        gap: 25px;
-        padding: 30px 16px;
+        gap: 17px;
       }
 
-      .details-image {
-        position: relative;
-        top: auto;
-        min-height: 300px;
-        height: 300px;
+      .image-stage {
+        min-height: 260px;
       }
 
-      .details-image img {
-        height: 300px;
+      .image-stage img {
+        height: 265px;
       }
 
-      .details-info h1 {
-        font-size: 31px;
+      .product-info {
+        padding: 22px;
       }
 
-      .sova-pyramid {
-        margin-top: 28px;
-        padding: 20px 10px;
+      .pyramid-section {
+        padding: 20px 15px;
       }
 
-      .pyramid-level {
-        padding-top: 15px;
-        padding-bottom: 15px;
+      .pyramid {
+        grid-template-columns: 1fr;
+        gap: 12px;
       }
 
-      .pyramid-level.top {
-        width: 76%;
+      .note-level {
+        padding: 17px;
       }
 
-      .pyramid-level.middle {
-        width: 89%;
+      .level-description {
+        min-height: 0;
       }
+    }
 
-      .note-chip {
+    @media (max-width: 380px) {
+      .nav-links {
+        gap: 8px;
         font-size: 11px;
-        padding: 6px 8px;
+      }
+
+      .buttons {
+        grid-template-columns: 1fr;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .details-image img,
-      .pyramid-level,
-      .details-actions button,
-      .details-actions a {
-        transition: none;
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
       }
     }
   </style>
 </head>
 
 <body>
-  <header class="header">
-    <a class="logo" href="index.html">SOVA<span>®</span></a>
-    <nav>
-      <a href="index.html">الرئيسية</a>
-      <a href="index.html#collection">عطورنا</a>
-      <a href="cart.html">
-        سلة المشتريات (<span data-cart-count>0</span>)
-      </a>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="logo" href="index.html" aria-label="SOVA الرئيسية">SOVA®</a>
+
+      <div class="nav-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="index.html#about">من نحن</a>
+        <a href="index.html#perfumes">عطورنا</a>
+        <a href="cart.html">السلة 🛒 <span id="cart-count"></span></a>
+      </div>
     </nav>
   </header>
 
-  <main class="details">
-    <div class="details-image">
-      <img
-        id="perfume-image"
-        src="static/images/AFNAN.jpg"
-        alt="عطر SOVA"
-      >
+  <main class="page">
+    <div class="breadcrumb">
+      الرئيسية / عطورنا / <span id="breadcrumb-name">تفاصيل العطر</span>
     </div>
 
-    <section class="details-info">
-      <p class="eyebrow">SOVA PERFUME COLLECTION</p>
-      <h1 id="perfume-name">Afnan 9 PM</h1>
+    <div class="product-layout">
+      <section class="glass-panel product-visual">
+        <div class="visual-label">S O V A · SCENT PROFILE</div>
 
-      <p id="perfume-description">
-        عطر مميز لمحبي الروائح الجذابة والحضور القوي.
-      </p>
-
-      <strong class="details-price" id="perfume-price">
-        65,000 د.ع
-      </strong>
-
-      <div class="details-actions">
-        <button class="add-button" id="add-button" type="button">
-          أضف إلى السلة +
-        </button>
-
-        <a class="back-button" href="index.html#collection">
-          رجوع للعطور
-        </a>
-      </div>
-
-      <p class="notice" id="notice" aria-live="polite"></p>
-
-      <section class="sova-pyramid" id="sova-pyramid"
-               aria-labelledby="pyramid-title">
-        <div class="pyramid-heading">
-          <small>SOVA • SCENT PROFILE</small>
-          <h2 id="pyramid-title">الهرم العطري</h2>
-          <p>رحلة الرائحة من أول رشة إلى المكونات الأساسية</p>
+        <div class="image-stage" id="image-stage">
+          <img id="product-image" src="" alt="صورة العطر">
         </div>
 
-        <div id="pyramid-content" aria-live="polite"></div>
-
-        <p class="pyramid-footnote">
-          تطوّر الرائحة يختلف حسب البشرة والطقس وطريقة الاستخدام.
-        </p>
+        <div class="visual-caption">THE ART OF PERFUMERY</div>
       </section>
+
+      <section class="glass-panel product-info">
+        <div class="eyebrow">DISCOVER YOUR SIGNATURE</div>
+
+        <h1 id="product-name">تفاصيل العطر</h1>
+        <p class="description" id="product-description"></p>
+
+        <div class="price-row">
+          <div>
+            <div class="price-label">سعر العطر</div>
+            <div class="price">
+              <span id="product-price">—</span>
+              <span class="currency">د.ع</span>
+            </div>
+          </div>
+          <div class="price-label">SOVA · PERFUMES</div>
+        </div>
+
+        <div class="buttons">
+          <button class="btn btn-primary" id="add-to-cart">
+            أضف إلى السلة 🛒
+          </button>
+          <a class="btn btn-secondary" href="index.html#perfumes">
+            رجوع للعطور
+          </a>
+        </div>
+
+        <p class="detail-note">
+          اختَر عطرك، واكتشف طبقاته العطرية، وخلي حضورك يحچي عنك.
+        </p>
+
+        <div class="error-message" id="product-error"></div>
+      </section>
+    </div>
+
+    <section class="glass-panel pyramid-section">
+      <div class="section-heading">
+        <div class="eyebrow">INSIDE THE FRAGRANCE</div>
+        <h2>الهرم العطري</h2>
+        <p>رحلة العطر من أول رشة، إلى قلبه، ثم أثره الأخير على البشرة.</p>
+      </div>
+
+      <div class="pyramid">
+        <article class="note-level top-level" id="top-level">
+          <div class="level-number">01 · OPENING</div>
+          <h3>نوتات المقدمة</h3>
+          <p class="level-description">الانطباع الأول عند رش العطر.</p>
+          <div class="notes" id="top-notes"></div>
+        </article>
+
+        <article class="note-level middle-level" id="middle-level">
+          <div class="level-number">02 · HEART</div>
+          <h3>نوتات القلب</h3>
+          <p class="level-description">الشخصية الأساسية التي تظهر بعد البداية.</p>
+          <div class="notes" id="middle-notes"></div>
+        </article>
+
+        <article class="note-level base-level" id="base-level">
+          <div class="level-number">03 · DRY DOWN</div>
+          <h3>نوتات القاعدة</h3>
+          <p class="level-description">الأثر العطري الذي يبقى مع مرور الوقت.</p>
+          <div class="notes" id="base-notes"></div>
+        </article>
+      </div>
+
+      <p class="pyramid-footnote">
+        قد يختلف ظهور النوتات وثبات العطر حسب البشرة والطقس وطريقة الاستخدام.
+      </p>
     </section>
   </main>
 
-  <footer>
-    <p>© SOVA — الفخامة تبدأ من التفاصيل</p>
-    <a href="https://wa.me/9647806364447">تواصل ويانا</a>
+  <footer class="site-footer">
+    <strong>SOVA®</strong>
+    <div>مو مجرد عطر، هذا حضور.</div>
+    <div>© SOVA Perfumes</div>
   </footer>
 
   <script src="static/js/app.js"></script>
@@ -402,11 +608,11 @@
         name: "Afnan 9 PM",
         price: 65000,
         image: "static/images/AFNAN.jpg",
-        description: "عطر مميز لمحبي الروائح الجذابة والحضور القوي.",
+        description: "عطر رجالي بطابع حلو ودافئ، مناسب لمحبي الروائح الجذابة والحضور القوي.",
         notes: {
-          top: ["التفاح", "القرفة", "الخزامى البري", "البرغموت"],
+          top: ["التفاح", "البرغموت", "القرفة", "اللافندر"],
           middle: ["زهر البرتقال", "زنبق الوادي"],
-          base: ["الفانيليا", "حبوب التونكا", "العنبر", "الباتشولي"]
+          base: ["الفانيلا", "حبوب التونكا", "العنبر", "الباتشولي"]
         }
       },
 
@@ -414,31 +620,35 @@
         name: "Afnan 9 PM Night Out",
         price: 65000,
         image: "static/images/night-out.jpg",
-        description: "طابع مسائي مميز لمحبي الروائح الجريئة.",
-        notes: null
+        description: "عطر من مجموعة 9 PM لمحبي الروائح المسائية والحضور اللافت.",
+        notes: {
+          top: ["الحمضيات", "التوابل"],
+          middle: ["الأخشاب", "النوتات العطرية"],
+          base: ["المسك", "الأخشاب الدافئة"]
+        }
       },
 
       "freeze": {
-        name: "Freeze Riiffs",
+        name: "RiiFFS Freeze",
         price: 50000,
         image: "static/images/FREEZE RIIFFS.jpg",
-        description: "عطر مميز لمحبي الروائح المنعشة والحضور الأنيق.",
+        description: "عطر RiiFFS Freeze لعشاق العطور ذات الطابع المنعش والحضور المميز.",
         notes: {
-          top: ["النعناع المدبب", "قشر الليمون", "برغموت كالابريا", "الجريب فروت", "الثلج"],
-          middle: ["الثلج", "الشاي", "الزنجبيل", "المريمية"],
-          base: ["أمبرماكس", "الفاوانيا", "خشب الأرز"]
+          top: ["الانتعاش", "النوتات المنعشة"],
+          middle: ["النوتات العطرية"],
+          base: ["الأخشاب", "المسك"]
         }
       },
 
       "flames": {
-        name: "Freeze In Flames Riiffs",
+        name: "RiiFFS In Flames",
         price: 50000,
         image: "static/images/FREEZE IN FLAMES RIIFFS.jpg",
-        description: "عطر يجمع بين الفواكه المنعشة والنعناع والدفء الخشبي.",
+        description: "عطر RiiFFS In Flames بطابع لافت لمحبي الروائح المميزة.",
         notes: {
-          top: ["التوت الأحمر", "النعناع المدبب", "التفاح الأحمر", "برغموت كالابريا", "الباشن فروت", "رقائق الثلج"],
-          middle: ["النعناع المدبب", "الخزامى", "الشاي", "المريمية"],
-          base: ["المسك", "خشب الأرز", "أمبر إكستريم"]
+          top: ["النوتات المنعشة", "التوابل"],
+          middle: ["النوتات العطرية"],
+          base: ["الأخشاب", "المسك"]
         }
       },
 
@@ -446,169 +656,178 @@
         name: "Lattafa Asad",
         price: 45000,
         image: "static/images/ASAD.jpg",
-        description: "عطر رجالي بطابع دافئ وجذاب.",
+        description: "عطر رجالي بطابع دافئ وتوابلي، مناسب لمحبي الروائح القوية.",
         notes: {
-          top: ["الفلفل الأسود", "التبغ", "الأناناس"],
-          middle: ["الباتشولي", "القهوة", "السوسن"],
-          base: ["الفانيليا", "العنبر", "الأخشاب الجافة", "البنزوين", "اللابدانوم"]
+          top: ["الفلفل الأسود", "الأناناس", "التبغ"],
+          middle: ["القهوة", "الباتشولي", "السوسن"],
+          base: ["الفانيلا", "العنبر", "الأخشاب الجافة", "البنزوين"]
         }
       },
 
       "supremacy-ce": {
-        name: "Supremacy Collector's Edition",
+        name: "Afnan Supremacy Collector's Edition",
         price: 70000,
         image: "static/images/supremacy-ce.jpg",
-        description: "عطر أنيق بطابع مميز وحضور قوي.",
+        description: "عطر من مجموعة Supremacy لمحبي الروائح الغنية والطابع الفاخر.",
         notes: {
-          top: ["الأناناس", "البرغموت", "التفاح", "الزهور البيضاء"],
-          middle: ["زهر البرتقال", "خشب البتولا", "العنبر"],
-          base: ["طحلب البلوط", "المسك", "العنبر الرمادي"]
+          top: ["الأناناس", "البرغموت", "التفاح"],
+          middle: ["خشب البتولا", "الياسمين", "الباتشولي"],
+          base: ["المسك", "العنبر", "الفانيلا", "الطحلب"]
         }
       },
 
       "hawas-ice": {
-        name: "Hawas Ice",
+        name: "Rasasi Hawas Ice",
         price: 45000,
         image: "static/images/hawas-ice.jpg",
-        description: "انتعاش بارد بطابع عصري.",
-        notes: null
+        description: "عطر منعش بطابع حيوي يناسب محبي الروائح العصرية.",
+        notes: {
+          top: ["الحمضيات", "التفاح", "الانتعاش"],
+          middle: ["النوتات المائية", "التوابل"],
+          base: ["الأخشاب", "المسك", "العنبر"]
+        }
       },
 
       "hawas-black": {
-        name: "Hawas Black",
+        name: "Rasasi Hawas Black",
         price: 45000,
         image: "static/images/hawas-black.jpg",
-        description: "طابع غامض لمحبي الروائح القوية.",
-        notes: null
+        description: "عطر من مجموعة Hawas لمحبي الروائح الجريئة والحضور المميز.",
+        notes: {
+          top: ["النوتات المنعشة", "الحمضيات"],
+          middle: ["النوتات العطرية", "التوابل"],
+          base: ["الأخشاب", "المسك", "العنبر"]
+        }
       },
 
       "hawas-kobra": {
-        name: "Hawas Kobra",
+        name: "Rasasi Hawas Kobra",
         price: 45000,
         image: "static/images/hawas-kobra.jpg",
-        description: "شخصية عطرية جريئة ومميزة.",
-        notes: null
+        description: "عطر من مجموعة Hawas بطابع مميز لعشاق العطور العصرية.",
+        notes: {
+          top: ["النوتات المنعشة", "الحمضيات"],
+          middle: ["النوتات العطرية", "التوابل"],
+          base: ["الأخشاب", "المسك"]
+        }
       }
     };
 
-    const params = new URLSearchParams(window.location.search);
-    const id = (params.get("id") || "afnan").trim().toLowerCase();
-    const perfume = perfumes[id];
+    const noteColors = [
+      "#78e6ff",
+      "#b3a0ff",
+      "#e8b777",
+      "#8ee6bb",
+      "#ff9fba",
+      "#ffd166",
+      "#8cbcff",
+      "#d6a6ff"
+    ];
 
-    const imageElement = document.getElementById("perfume-image");
-    const nameElement = document.getElementById("perfume-name");
-    const descriptionElement =
-      document.getElementById("perfume-description");
-    const priceElement = document.getElementById("perfume-price");
-    const addButton = document.getElementById("add-button");
-    const notice = document.getElementById("notice");
-    const pyramidContent = document.getElementById("pyramid-content");
+    function renderNotes(containerId, notes) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = "";
 
-    function renderPyramid(notes) {
-      pyramidContent.replaceChildren();
-
-      if (!notes) {
-        const message = document.createElement("div");
-        message.className = "pyramid-unavailable";
-
-        const symbol = document.createElement("span");
-        symbol.textContent = "✧";
-
-        const text = document.createElement("div");
-        text.textContent =
-          "الهرم العطري لهذا العطر قيد التحقق. سنضيف النوتات بعد التأكد من مصدر موثوق.";
-
-        message.append(symbol, text);
-        pyramidContent.appendChild(message);
+      if (!Array.isArray(notes) || notes.length === 0) {
+        container.textContent = "لا تتوفر معلومات مؤكدة عن هذه الطبقة حالياً.";
+        container.parentElement.classList.add("empty");
         return;
       }
 
-      const levels = [
-        { key: "top", number: "01", title: "الإفتتاحية" },
-        { key: "middle", number: "02", title: "قلب العطر" },
-        { key: "base", number: "03", title: "المكونات الأساسية" }
-      ];
+      container.parentElement.classList.remove("empty");
 
-      levels.forEach((level, index) => {
-        const section = document.createElement("div");
-        section.className = "pyramid-level " + level.key;
+      notes.forEach((note, index) => {
+        const chip = document.createElement("span");
+        chip.className = "note-chip";
+        chip.style.setProperty(
+          "--note-color",
+          noteColors[index % noteColors.length]
+        );
 
-        const number = document.createElement("span");
-        number.className = "level-number";
-        number.textContent = level.number;
+        const dot = document.createElement("span");
+        dot.className = "note-dot";
 
-        const title = document.createElement("span");
-        title.className = "level-title";
-        title.textContent = level.title;
+        const label = document.createElement("span");
+        label.textContent = note;
 
-        const list = document.createElement("div");
-        list.className = "note-list";
-
-        notes[level.key].forEach(note => {
-          const chip = document.createElement("span");
-          chip.className = "note-chip";
-
-          const symbol = document.createElement("span");
-          symbol.className = "note-symbol";
-          symbol.setAttribute("aria-hidden", "true");
-          symbol.textContent = "✧";
-
-          const label = document.createElement("span");
-          label.textContent = note;
-
-          chip.append(symbol, label);
-          list.appendChild(chip);
-        });
-
-        section.append(number, title, list);
-        pyramidContent.appendChild(section);
-
-        if (index < levels.length - 1) {
-          const connector = document.createElement("div");
-          connector.className = "pyramid-connector";
-          connector.setAttribute("aria-hidden", "true");
-          pyramidContent.appendChild(connector);
-        }
+        chip.appendChild(dot);
+        chip.appendChild(label);
+        container.appendChild(chip);
       });
     }
 
-    if (!perfume) {
-      document.title = "العطر غير موجود | SOVA";
-      nameElement.textContent = "العطر غير موجود";
-      descriptionElement.textContent =
-        "رابط هذا العطر غير صحيح. ارجع إلى مجموعة العطور واختار العطر مرة ثانية.";
-      priceElement.textContent = "";
-      imageElement.style.display = "none";
-      addButton.disabled = true;
-      notice.textContent = "تأكد من رابط العطر في الصفحة الرئيسية.";
-      document.getElementById("sova-pyramid").hidden = true;
-    } else {
-      document.title = perfume.name + " | SOVA";
-      nameElement.textContent = perfume.name;
-      descriptionElement.textContent = perfume.description;
-      priceElement.textContent =
-        perfume.price.toLocaleString("en-US") + " د.ع";
+    function showError(message) {
+      const box = document.getElementById("product-error");
+      box.textContent = message;
+      box.style.display = "block";
+    }
 
-      imageElement.alt = perfume.name;
-      imageElement.src = perfume.image;
+    function renderProduct() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      const product = perfumes[id];
 
-      imageElement.onerror = function () {
-        notice.textContent =
-          "تعذر تحميل صورة هذا العطر. تأكد من اسم الصورة داخل مجلد static/images.";
+      if (!product) {
+        document.getElementById("product-name").textContent =
+          "ما لكينا هذا العطر";
+
+        document.getElementById("product-description").textContent =
+          "ارجع إلى صفحة العطور واختَر العطر اللي تريد تشوف تفاصيله.";
+
+        document.getElementById("product-price").textContent = "—";
+        document.getElementById("product-image").style.display = "none";
+
+        document.getElementById("image-stage").innerHTML =
+          '<div class="image-missing">SOVA<br>العطر المطلوب غير موجود أو الرابط غير صحيح.</div>';
+
+        document.getElementById("add-to-cart").disabled = true;
+
+        showError("تأكد أن رابط صفحة العطر يحتوي على المعرّف الصحيح بعد id=.");
+        return;
+      }
+
+      document.title = product.name + " | SOVA";
+
+      document.getElementById("breadcrumb-name").textContent = product.name;
+      document.getElementById("product-name").textContent = product.name;
+      document.getElementById("product-description").textContent =
+        product.description;
+      document.getElementById("product-price").textContent =
+        product.price.toLocaleString("en-US");
+
+      const image = document.getElementById("product-image");
+      image.src = product.image;
+      image.alt = product.name;
+
+      image.onerror = function () {
+        this.style.display = "none";
+
+        const stage = document.getElementById("image-stage");
+        if (!stage.querySelector(".image-missing")) {
+          const message = document.createElement("div");
+          message.className = "image-missing";
+          message.textContent =
+            "تعذر تحميل الصورة. تأكد من اسم ملف الصورة داخل static/images.";
+          stage.appendChild(message);
+        }
       };
 
-      renderPyramid(perfume.notes);
+      renderNotes("top-notes", product.notes.top);
+      renderNotes("middle-notes", product.notes.middle);
+      renderNotes("base-notes", product.notes.base);
 
-      addButton.addEventListener("click", function () {
-        if (typeof sovaAddToCart === "function") {
-          sovaAddToCart(id);
-          notice.textContent = "انضاف العطر للسلة 💙";
+      document.getElementById("add-to-cart").onclick = function () {
+        if (typeof window.sovaAddToCart === "function") {
+          window.sovaAddToCart(id);
         } else {
-          notice.textContent =
-            "تعذر تحميل السلة. حدّث الصفحة وحاول مرة ثانية.";
+          showError(
+            "تعذر الاتصال بدالة السلة. تأكد من ملف static/js/app.js."
+          );
         }
-      });
+      };
     }
+
+    renderProduct();
   </script>
 </body>
 </html>
