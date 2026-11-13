@@ -30,6 +30,13 @@ const SOVA_PRODUCTS = {
     price: 70000,
     image: "static/images/supremacy-ce.jpg"
   },
+
+  "hawas-elixir": {
+    name: "Rasasi Hawas Elixir",
+    price: 45000,
+    image: "static/images/hawas-elixir.jpg"
+  },
+
   "hawas-ice": {
     name: "Hawas Ice",
     price: 45000,
@@ -100,7 +107,6 @@ function sovaAddToCart(id) {
   alert("انضاف " + SOVA_PRODUCTS[id].name + " للسلة بنجاح 💙");
 }
 
-// توافق مباشر ويا أزرار index.html الحالية
 function addToCart(id) {
   sovaAddToCart(id);
 }
@@ -257,3 +263,7 @@ document.addEventListener("DOMContentLoaded", function() {
   sovaUpdateCartCount();
   sovaRenderCart();
 });
+
+// إتاحة دوال السلة لصفحة تفاصيل العطر
+window.sovaAddToCart = sovaAddToCart;
+window.addToCart = addToCart;
