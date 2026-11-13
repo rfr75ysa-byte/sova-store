@@ -30,13 +30,11 @@ const SOVA_PRODUCTS = {
     price: 70000,
     image: "static/images/supremacy-ce.jpg"
   },
-
   "hawas-elixir": {
     name: "Rasasi Hawas Elixir",
     price: 45000,
     image: "static/images/hawas-elixir.jpg"
   },
-
   "hawas-ice": {
     name: "Hawas Ice",
     price: 45000,
@@ -51,6 +49,58 @@ const SOVA_PRODUCTS = {
     name: "Hawas Kobra",
     price: 45000,
     image: "static/images/hawas-kobra.jpg"
+  },
+
+  // العطور الجديدة
+  "hawas-malibu": {
+    name: "Rasasi Hawas Malibu",
+    price: 50000,
+    image: "static/images/hawas-malibu.jpg"
+  },
+  "le-male-elixir": {
+    name: "Jean Paul Gaultier Le Male Elixir",
+    price: 186500,
+    image: "static/images/le-male-elixir.jpg"
+  },
+  "le-beau-le-parfum": {
+    name: "Jean Paul Gaultier Le Beau Le Parfum",
+    price: 195000,
+    image: "static/images/le-beau-le-parfum.jpg"
+  },
+  "9pm-elixir": {
+    name: "Afnan 9 PM Elixir",
+    price: 65000,
+    image: "static/images/9pm-elixir.jpg"
+  },
+  "attacks": {
+    name: "Attacks",
+    price: 60000,
+    image: "static/images/attacks.jpg"
+  },
+  "attacks-blue": {
+    name: "Attacks Blue",
+    price: 60000,
+    image: "static/images/attacks-blue.jpg"
+  },
+  "charisma": {
+    name: "Charisma",
+    price: 100000,
+    image: "static/images/charisma.jpg"
+  },
+  "le-beau-paradise-garden": {
+    name: "Jean Paul Gaultier Le Beau Paradise Garden",
+    price: 197000,
+    image: "static/images/le-beau-paradise-garden.jpg"
+  },
+  "frankel-black-elixir": {
+    name: "Frankel Black Elixir",
+    price: 65000,
+    image: "static/images/frankel-black-elixir.jpg"
+  },
+  "club-de-nuit-intense-man": {
+    name: "Armaf Club De Nuit Intense Man",
+    price: 65000,
+    image: "static/images/club-de-nuit-intense-man.jpg"
   }
 };
 
@@ -58,13 +108,8 @@ const SOVA_CART_KEY = "sova_cart";
 
 function sovaGetCart() {
   try {
-    const cart = JSON.parse(
-      localStorage.getItem(SOVA_CART_KEY) || "{}"
-    );
-
-    return cart && typeof cart === "object" && !Array.isArray(cart)
-      ? cart
-      : {};
+    const cart = JSON.parse(localStorage.getItem(SOVA_CART_KEY) || "{}");
+    return cart && typeof cart === "object" && !Array.isArray(cart) ? cart : {};
   } catch {
     return {};
   }
@@ -77,15 +122,11 @@ function sovaSaveCart(cart) {
 
 function sovaUpdateCartCount() {
   const cart = sovaGetCart();
-
   const count = Object.values(cart).reduce(
-    (sum, quantity) => sum + Math.max(0, Number(quantity) || 0),
-    0
+    (sum, quantity) => sum + Math.max(0, Number(quantity) || 0), 0
   );
 
-  document.querySelectorAll(
-    "[data-cart-count], #cart-count"
-  ).forEach(element => {
+  document.querySelectorAll("[data-cart-count], #cart-count").forEach(element => {
     element.textContent = count;
   });
 }
@@ -100,7 +141,6 @@ function sovaAddToCart(id) {
 
   const cart = sovaGetCart();
   cart[id] = (Number(cart[id]) || 0) + 1;
-
   sovaSaveCart(cart);
   sovaRenderCart();
 
@@ -117,11 +157,8 @@ function sovaChangeQuantity(id, change) {
   const cart = sovaGetCart();
   const quantity = (Number(cart[id]) || 0) + change;
 
-  if (quantity <= 0) {
-    delete cart[id];
-  } else {
-    cart[id] = quantity;
-  }
+  if (quantity <= 0) delete cart[id];
+  else cart[id] = quantity;
 
   sovaSaveCart(cart);
   sovaRenderCart();
@@ -130,7 +167,6 @@ function sovaChangeQuantity(id, change) {
 function sovaRemoveFromCart(id) {
   const cart = sovaGetCart();
   delete cart[id];
-
   sovaSaveCart(cart);
   sovaRenderCart();
 }
@@ -158,13 +194,9 @@ function sovaRenderCart() {
 
     html += `
       <article class="cart-item">
-        <img
-          src="${product.image}"
-          alt="${product.name}"
-          loading="lazy"
+        <img src="${product.image}" alt="${product.name}" loading="lazy"
           style="width:100px;height:110px;object-fit:contain;flex-shrink:0;background:#081727;border-radius:6px"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
-        >
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
         <div style="display:none;color:#8cddff;font-size:12px;min-width:85px">
           صورة العطر غير متوفرة
         </div>
@@ -184,10 +216,7 @@ function sovaRenderCart() {
   container.innerHTML = html || "<p>سلتك فارغة حالياً 💙</p>";
 
   const totalElement = document.getElementById("cart-total");
-
-  if (totalElement) {
-    totalElement.textContent = sovaFormatPrice(total);
-  }
+  if (totalElement) totalElement.textContent = sovaFormatPrice(total);
 
   sovaUpdateCartCount();
 }
@@ -205,10 +234,7 @@ function sovaCheckout() {
 
     const subtotal = product.price * quantity;
     total += subtotal;
-
-    lines.push(
-      `${product.name} × ${quantity} = ${sovaFormatPrice(subtotal)}`
-    );
+    lines.push(`${product.name} × ${quantity} = ${sovaFormatPrice(subtotal)}`);
   });
 
   if (!lines.length) {
@@ -226,10 +252,7 @@ function sovaCheckout() {
     "يرجى تأكيد الطلب والتوصيل."
   ].join("\n");
 
-  const url =
-    "https://wa.me/9647806364447?text=" +
-    encodeURIComponent(message);
-
+  const url = "https://wa.me/9647806364447?text=" + encodeURIComponent(message);
   window.open(url, "_blank", "noopener,noreferrer");
 }
 
@@ -243,7 +266,6 @@ document.addEventListener("click", function(event) {
     if (action === "plus") sovaChangeQuantity(id, 1);
     if (action === "minus") sovaChangeQuantity(id, -1);
     if (action === "remove") sovaRemoveFromCart(id);
-
     return;
   }
 
@@ -264,6 +286,5 @@ document.addEventListener("DOMContentLoaded", function() {
   sovaRenderCart();
 });
 
-// إتاحة دوال السلة لصفحة تفاصيل العطر
 window.sovaAddToCart = sovaAddToCart;
 window.addToCart = addToCart;
